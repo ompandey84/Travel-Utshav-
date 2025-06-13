@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Utsav - Reviews</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="home.css">
+  <style>
+        .reviews-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .review-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin-bottom: 2rem;
+      display: flex;
+            gap: 2rem;
+      align-items: center;
+        }
+        
+        .review-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .review-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .review-content {
+            flex: 1;
+        }
+        
+        .review-content h3 {
+            font-size: 2rem;
+            color: #219150;
+            margin-bottom: 0.5rem;
+        }
+        
+        .review-content span {
+            color: #666;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .review-content p {
+            font-size: 1.6rem;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .rating {
+            display: flex;
+            gap: 0.3rem;
+            margin: 1rem 0;
+        }
+        
+        .rating i {
+            color: #ffc107;
+            font-size: 1.8rem;
+        }
+        
+        .add-review-form {
+            background: #fff;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+            margin-top: 4rem;
+        }
+        
+        .form-title {
+            font-size: 2.5rem;
+            color: #219150;
+            margin-bottom: 2rem;
+      text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 2rem;
+        }
+        
+        .form-group label {
+      display: block;
+            font-size: 1.6rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+    }
+
+        .form-control {
+      width: 100%;
+            padding: 1rem;
+            font-size: 1.6rem;
+      border: 1px solid #ddd; 
+            border-radius: 0.5rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: #219150;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .star-rating {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+        }
+        
+        .star-rating input {
+            display: none;
+        }
+        
+        .star-rating label {
+            cursor: pointer;
+            font-size: 2.5rem;
+            color: #ddd;
+            margin-right: 0.5rem;
+        }
+        
+        .star-rating label:before {
+            content: '★';
+        }
+        
+        .star-rating input:checked ~ label {
+            color: #ffc107;
+        }
+        
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            color: #ffc107;
+        }
+        
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 1.2rem;
+            background: #219150;
+            color: #fff;
+      border: none;
+            border-radius: 0.5rem;
+            font-size: 1.8rem;
+      cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .btn-submit:hover {
+            background: #1a7b42;
+        }
+        
+        @media (max-width: 768px) {
+            .review-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .review-img {
+                margin: 0 auto;
+            }
+            
+            .rating {
+                justify-content: center;
+            }
+    }
+  </style>
+</head>
+<body>
+    <header class="header">
+        <a href="home.html" class="logo"><i class="fas fa-hiking"></i>travel Utsav</a>
+        
+        <nav class="navbar">
+            <div id="nav-close" class="fas fa-times"></div>
+            <a href="home.html">home</a>
+            <a href="home.html#about">about</a>
+            <a href="packages.html">packages</a>
+            <a href="reviews.html">reviews</a>
+            <a href="blogs.html">blogs</a>
+            <a href="chat.html">AI Assistant</a>
+        </nav>
+        <div class="icons">
+            <div id="menu-btn" class="fas fa-bars"></div>
+            <div id="search-btn" class="fas fa-search"></div>
+            <a href="shop.html" class="fas fa-shopping-cart"></a>
+            <a href="./travelPage.html" class="fa-solid fa-motorcycle"></a>
+            <a href="../group_chat.php" class="fa-solid fa-comments"></a>
+            <a href="../auth.php" class="fa-regular fa-user"></a>
+        </div>
+    </header>
+
+    <div class="search-form">
+        <div id="close-search" class="fas fa-times"></div>
+        <form action="search-results.html" method="GET">
+            <input type="search" name="query" placeholder="search here..." id="search-box">
+            <label for="search-box" class="fas fa-search"></label>
+    </form>
+  </div>
+
+    <section class="reviews" id="reviews" style="margin-top: 8rem;">
+        <h1 class="heading">Clients Reviews</h1>
+        
+        <div class="reviews-container">
+            <!-- Review Cards -->
+            <div class="review-card">
+                <div class="review-img">
+                    <img src="men1.jpg" alt="Radhe Singh">
+                </div>
+                <div class="review-content">
+                    <h3>Radhe Singh</h3>
+                    <span>Designer</span>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p>"The rapids were thrilling and perfectly safe thanks to our professional guide. We even jumped into the river for a swim—it was unforgettable! The entire experience was well organized from start to finish, and our guide was both knowledgeable and entertaining. I would highly recommend this adventure to anyone visiting Indore."</p>
+                </div>
+            </div>
+            
+            <div class="review-card">
+                <div class="review-img">
+                    <img src="girl1.jpg" alt="Sneha Singh">
+                </div>
+                <div class="review-content">
+                    <h3>Sneha Singh</h3>
+                    <span>Photographer</span>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p>"The jump was pure adrenaline! Standing on the edge was terrifying but exhilarating. The team made me feel secure, and the views were breathtaking. As a photographer, I was able to capture some incredible shots during the experience. The staff was extremely professional and took all safety precautions seriously. I'll definitely be back for more adventures with Travel Utsav!"</p>
+                </div>
+            </div>
+            
+            <div class="review-card">
+                <div class="review-img">
+                    <img src="men2.jpg" alt="Arpan Singh">
+                </div>
+                <div class="review-content">
+                    <h3>Arpan Singh</h3>
+                    <span>Biker</span>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <p>"Flying above the snow-covered trees was like a dream! The longest zipline gave an incredible rush while the staff ensured top-notch safety. As an avid biker, I'm always looking for the next adrenaline rush, and this experience did not disappoint. The booking process was smooth, and the team was very accommodating with our schedule changes."</p>
+                </div>
+            </div>
+            
+            <div class="review-card">
+                <div class="review-img">
+                    <img src="girl2.jpg" alt="Priya Singh">
+                </div>
+                <div class="review-content">
+                    <h3>Priya Singh</h3>
+                    <span>Dancer</span>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p>"The roller-coaster ride over golden dunes was thrilling. The driver was skilled, and the cultural dinner afterward added a special touch. As a dancer, I appreciate experiences that combine adventure with cultural elements. The sunset views were absolutely magical, and our guide shared fascinating stories about the region's history and traditions."</p>
+                </div>
+            </div>
+            
+            <!-- Add Review Form -->
+            <div class="add-review-form">
+                <h2 class="form-title">Share Your Experience</h2>
+                <form id="review-form" action="submit-review.php" method="POST">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="occupation">Occupation</label>
+                        <input type="text" class="form-control" id="occupation" name="occupation">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="rating">Rating</label>
+                        <div class="star-rating">
+                            <input type="radio" id="star5" name="rating" value="5" required>
+                            <label for="star5"></label>
+                            <input type="radio" id="star4" name="rating" value="4">
+                            <label for="star4"></label>
+                            <input type="radio" id="star3" name="rating" value="3">
+                            <label for="star3"></label>
+                            <input type="radio" id="star2" name="rating" value="2">
+                            <label for="star2"></label>
+                            <input type="radio" id="star1" name="rating" value="1">
+                            <label for="star1"></label>
+    </div>
+  </div>
+                    
+                    <div class="form-group">
+                        <label for="review">Your Review</label>
+                        <textarea class="form-control" id="review" name="review" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit">Submit Review</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="footer">
+        <div class="box-container">
+            <div class="box">
+                <h3>Quick Links</h3>
+                <a href="home.html">home</a>
+                <a href="home.html#about">about</a>
+                <a href="shop.html">shop</a>
+                <a href="packages.html">packages</a>
+                <a href="reviews.html">reviews</a>
+                <a href="blogs.html">blogs</a>
+                <a href="chat.html">AI Assistant</a>
+            </div>
+            <div class="box">
+                <h3>Extra Links</h3>
+                <a href="#">My Account</a>
+                <a href="#">My Order</a>
+                <a href="#">Wishlist</a>
+                <a href="#">Any Question </a>
+                <a href="#">Terms of Use</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="box">
+                <h3>Contact Information</h3>
+                <a href="#"><i class="fas fa-phone"></i>+91-7241142006</a>
+                <a href="#"><i class="fas fa-phone"></i>+91-9705745856</a>
+                <a href="#"><i class="fas fa-envelope"></i>travel_utsav@gmail.com</a>
+                <a href="#"><i class="fas fa-map"></i>indore, Madhya Pradesh - 451010</a>
+            </div>
+            <div class="box">
+                <a href="#"><i class="fab fa-facebook-f"></i>facebook</a>
+                <a href="#"><i class="fab fa-twitter"></i>Twitter</a>
+                <a href="#"><i class="fab fa-instagram"></i>Instagram</a>
+                <a href="#"><i class="fab fa-github"></i>Github</a>
+            </div>
+        </div>
+        <div class="credit">Created By <span>Travel Utsav Team</span> | All Rights Reserved</div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="home.js"></script>
+
+  <script>
+        // Form submission handler
+        document.getElementById('review-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const occupation = document.getElementById('occupation').value;
+            const rating = document.querySelector('input[name="rating"]:checked').value;
+            const reviewText = document.getElementById('review').value;
+            
+            // Create a new review card
+            const reviewCard = document.createElement('div');
+            reviewCard.className = 'review-card';
+            
+            // Create HTML for the new review
+            reviewCard.innerHTML = `
+                <div class="review-img">
+                    <img src="user-default.jpg" alt="${name}">
+                </div>
+                <div class="review-content">
+                    <h3>${name}</h3>
+                    <span>${occupation}</span>
+                    <div class="rating">
+                        ${generateStars(rating)}
+                    </div>
+                    <p>"${reviewText}"</p>
+                </div>
+            `;
+            
+            // Add the new review to the top of the reviews
+            const reviewsContainer = document.querySelector('.reviews-container');
+            reviewsContainer.insertBefore(reviewCard, reviewsContainer.firstChild);
+            
+            // Reset the form
+            document.getElementById('review-form').reset();
+            
+            // Show success message
+            alert('Thank you for your review!');
+        });
+        
+        // Function to generate star HTML based on rating
+        function generateStars(rating) {
+            let starsHTML = '';
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 !== 0;
+            
+            // Add full stars
+            for (let i = 0; i < fullStars; i++) {
+                starsHTML += '<i class="fas fa-star"></i>';
+            }
+            
+            // Add half star if needed
+            if (hasHalfStar) {
+                starsHTML += '<i class="fas fa-star-half-alt"></i>';
+            }
+            
+            // Add empty stars
+            const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+            for (let i = 0; i < emptyStars; i++) {
+                starsHTML += '<i class="far fa-star"></i>';
+            }
+            
+            return starsHTML;
+    }
+  </script>
+</body>
+</html>

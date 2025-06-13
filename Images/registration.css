@@ -1,0 +1,92 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: url('download.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+.register-container, .login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;  /* Ensuring full width to center the form */
+}
+
+.register-card, .login-card {
+    background: rgba(255, 255, 255, 0.95); /* Adding a slight transparency to the form background */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    max-width: 90%; /* Ensure it adapts to smaller screens */
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+    color: #ff6600; /* Orange color matching the image theme */
+}
+
+p {
+    margin-bottom: 20px;
+    color: #666;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: left; /* Align text labels to the left */
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333; /* Dark text color for contrast */
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* Ensure padding does not affect width */
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    background: #ff6600; /* Orange color matching the image theme */
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+}
+
+button:hover {
+    background: #e65c00; /* Darker orange for hover effect */
+}
+
+h4 a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+h4 a:hover {
+    text-decoration: underline;
+}
+
+.login-link h4, .register-link h4 {
+    margin-top: 20px;
+    color: #666;
+}
+
+.register-card:hover, .login-card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+

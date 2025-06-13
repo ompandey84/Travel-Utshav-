@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - Travel Utsav</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="home.css">
+    <style>
+        .payment-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        .payment-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .payment-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .payment-form .full-width {
+            grid-column: span 2;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .card-details {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .payment-options {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .payment-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .payment-btn {
+            background: var(--main-color);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .payment-btn:hover {
+            background: #0056b3;
+        }
+        
+        .secure-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            color: #555;
+        }
+        
+        .secure-badge i {
+            margin-right: 10px;
+            color: green;
+        }
+        
+        @media (max-width: 768px) {
+            .payment-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .payment-form .full-width {
+                grid-column: span 1;
+            }
+            
+            .card-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- header section -->
+    <header class="header">
+        <a href="home.html" class="logo"><i class="fas fa-paper-plane"></i> Travel Utsav</a>
+        <nav class="navbar">
+            <a href="home.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="packages.html">Packages</a>
+            <a href="adventure-ideas.html">Adventures</a>
+            <a href="shop.html">Shop</a>
+            <a href="blogs.html">Blogs</a>
+            <a href="reviews.html">Reviews</a>
+            <a href="chat.html">AI Assistant</a>
+        </nav>
+        <div class="icons">
+            <div id="menu-btn" class="fas fa-bars"></div>
+            <a href="shop.html" class="fas fa-shopping-cart"></a>
+            <div id="search-btn" class="fas fa-search"></div>
+        </div>
+        <form action="" class="search-form">
+            <input type="search" name="" placeholder="search here..." id="search-box">
+            <label for="search-box" class="fas fa-search"></label>
+        </form>
+    </header>
+
+    <!-- payment section -->
+    <section class="payment-container">
+        <div class="payment-header">
+            <h2>Secure Payment</h2>
+            <p>Complete your booking by providing payment details</p>
+        </div>
+        
+        <div class="payment-options">
+            <div class="payment-option">
+                <input type="radio" id="credit-card" name="payment-method" checked onclick="showPaymentForm('credit-card-form')">
+                <label for="credit-card">Credit Card</label>
+            </div>
+            <div class="payment-option">
+                <input type="radio" id="debit-card" name="payment-method" onclick="showPaymentForm('debit-card-form')">
+                <label for="debit-card">Debit Card</label>
+            </div>
+            <div class="payment-option">
+                <input type="radio" id="upi" name="payment-method" onclick="showPaymentForm('upi-form')">
+                <label for="upi">UPI</label>
+            </div>
+            <div class="payment-option">
+                <input type="radio" id="net-banking" name="payment-method" onclick="showPaymentForm('net-banking-form')">
+                <label for="net-banking">Net Banking</label>
+            </div>
+        </div>
+        
+        <!-- Credit Card Form -->
+        <form class="payment-form" id="credit-card-form" action="process_payment.php" method="POST">
+            <input type="hidden" name="payment_method" value="Credit Card">
+            
+            <div class="form-group full-width">
+                <label for="booking-details">Booking Details</label>
+                <input type="text" id="booking-details" name="package_name" placeholder="Package or Product Name" readonly>
+            </div>
+            
+            <div class="form-group">
+                <label for="name">Cardholder Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter cardholder name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            
+            <div class="form-group full-width">
+                <label>Card Details</label>
+                <div class="card-details">
+                    <input type="text" name="card_number" placeholder="Card Number" maxlength="16" required>
+                    <input type="text" name="expiry" placeholder="MM/YY" maxlength="5" required>
+                    <input type="text" name="cvv" placeholder="CVV" maxlength="3" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="amount">Amount</label>
+                <input type="text" id="amount" name="amount_display" placeholder="₹0.00" readonly>
+                <input type="hidden" id="amount_value" name="amount" value="0">
+            </div>
+            
+            <div class="form-group">
+                <label for="currency">Currency</label>
+                <select id="currency" name="currency">
+                    <option value="INR">Indian Rupee (₹)</option>
+                    <option value="USD">US Dollar ($)</option>
+                    <option value="EUR">Euro (€)</option>
+                </select>
+            </div>
+            
+            <div class="form-group full-width">
+                <button type="submit" class="payment-btn" id="pay-now-btn">Pay Now</button>
+            </div>
+        </form>
+        
+        <!-- Debit Card Form -->
+        <form class="payment-form" id="debit-card-form" style="display:none;" action="process_payment.php" method="POST">
+            <input type="hidden" name="payment_method" value="Debit Card">
+            
+            <div class="form-group full-width">
+                <label for="debit-booking-details">Booking Details</label>
+                <input type="text" id="debit-booking-details" name="package_name" placeholder="Package or Product Name" readonly>
+            </div>
+            
+            <div class="form-group">
+                <label for="debit-name">Cardholder Name</label>
+                <input type="text" id="debit-name" name="name" placeholder="Enter cardholder name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="debit-email">Email</label>
+                <input type="email" id="debit-email" name="email" placeholder="Enter your email" required>
+            </div>
+            
+            <div class="form-group full-width">
+                <label>Card Details</label>
+                <div class="card-details">
+                    <input type="text" name="card_number" placeholder="Card Number" maxlength="16" required>
+                    <input type="text" name="expiry" placeholder="MM/YY" maxlength="5" required>
+                    <input type="text" name="cvv" placeholder="CVV" maxlength="3" required>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="debit-bank">Bank Name</label>
+                <select id="debit-bank" name="bank_name">
+                    <option value="">Select your bank</option>
+                    <option value="State Bank of India">State Bank of India</option>
+                    <option value="HDFC Bank">HDFC Bank</option>
+                    <option value="ICICI Bank">ICICI Bank</option>
+                    <option value="Axis Bank">Axis Bank</option>
+                    <option value="Punjab National Bank">Punjab National Bank</option>
+                    <option value="Bank of Baroda">Bank of Baroda</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="debit-amount">Amount</label>
+                <input type="text" id="debit-amount" name="amount_display" placeholder="₹0.00" readonly>
+                <input type="hidden" id="debit_amount_value" name="amount" value="0">
+            </div>
+            
+            <div class="form-group full-width">
+                <button type="submit" class="payment-btn">Pay Now</button>
+            </div>
+        </form>
+        
+        <!-- UPI Form -->
+        <form class="payment-form" id="upi-form" style="display:none;" action="process_payment.php" method="POST">
+            <input type="hidden" name="payment_method" value="UPI">
+            
+            <div class="form-group full-width">
+                <label for="upi-booking-details">Booking Details</label>
+                <input type="text" id="upi-booking-details" name="package_name" placeholder="Package or Product Name" readonly>
+            </div>
+            
+            <div class="form-group">
+                <label for="upi-name">Full Name</label>
+                <input type="text" id="upi-name" name="name" placeholder="Enter your name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="upi-email">Email</label>
+                <input type="email" id="upi-email" name="email" placeholder="Enter your email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="upi-id">UPI ID</label>
+                <input type="text" id="upi-id" name="upi_id" placeholder="yourname@upi" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="upi-app">Preferred UPI App</label>
+                <select id="upi-app" name="upi_app">
+                    <option value="">Select UPI App</option>
+                    <option value="Google Pay">Google Pay</option>
+                    <option value="PhonePe">PhonePe</option>
+                    <option value="Paytm">Paytm</option>
+                    <option value="BHIM">BHIM</option>
+                    <option value="Amazon Pay">Amazon Pay</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="upi-amount">Amount</label>
+                <input type="text" id="upi-amount" name="amount_display" placeholder="₹0.00" readonly>
+                <input type="hidden" id="upi_amount_value" name="amount" value="0">
+            </div>
+            
+            <div class="form-group full-width">
+                <button type="submit" class="payment-btn">Pay Now</button>
+            </div>
+        </form>
+        
+        <!-- Net Banking Form -->
+        <form class="payment-form" id="net-banking-form" style="display:none;" action="process_payment.php" method="POST">
+            <input type="hidden" name="payment_method" value="Net Banking">
+            
+            <div class="form-group full-width">
+                <label for="netbank-booking-details">Booking Details</label>
+                <input type="text" id="netbank-booking-details" name="package_name" placeholder="Package or Product Name" readonly>
+            </div>
+            
+            <div class="form-group">
+                <label for="netbank-name">Account Holder Name</label>
+                <input type="text" id="netbank-name" name="name" placeholder="Enter account holder name" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="netbank-email">Email</label>
+                <input type="email" id="netbank-email" name="email" placeholder="Enter your email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="netbank-bank">Select Bank</label>
+                <select id="netbank-bank" name="bank_name" required>
+                    <option value="">Choose your bank</option>
+                    <option value="State Bank of India">State Bank of India</option>
+                    <option value="HDFC Bank">HDFC Bank</option>
+                    <option value="ICICI Bank">ICICI Bank</option>
+                    <option value="Axis Bank">Axis Bank</option>
+                    <option value="Punjab National Bank">Punjab National Bank</option>
+                    <option value="Bank of Baroda">Bank of Baroda</option>
+                    <option value="Kotak Mahindra Bank">Kotak Mahindra Bank</option>
+                    <option value="IDFC First Bank">IDFC First Bank</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="netbank-account">Account Number (Last 4 digits)</label>
+                <input type="text" id="netbank-account" name="account_number" placeholder="XXXX" maxlength="4" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="netbank-amount">Amount</label>
+                <input type="text" id="netbank-amount" name="amount_display" placeholder="₹0.00" readonly>
+                <input type="hidden" id="netbank_amount_value" name="amount" value="0">
+            </div>
+            
+            <div class="form-group full-width">
+                <button type="submit" class="payment-btn">Pay Now</button>
+            </div>
+        </form>
+        
+        <div class="secure-badge">
+            <i class="fas fa-lock"></i>
+            <span>Your payment information is secure and encrypted</span>
+        </div>
+    </section>
+
+    <!-- footer section -->
+    <section class="footer">
+        <div class="box-container">
+            <div class="box">
+                <h3>Quick Links</h3>
+                <a href="home.html"><i class="fas fa-angle-right"></i>Home</a>
+                <a href="home.html#about"><i class="fas fa-angle-right"></i>About</a>
+                <a href="packages.html"><i class="fas fa-angle-right"></i>Packages</a>
+                <a href="shop.html"><i class="fas fa-angle-right"></i>Shop</a>
+                <a href="reviews.html"><i class="fas fa-angle-right"></i>Reviews</a>
+                <a href="blogs.html"><i class="fas fa-angle-right"></i>Blogs</a>
+            </div>
+            <div class="box">
+                <h3>Extra Links</h3>
+                <a href="my_account.php"><i class="fas fa-angle-right"></i>My Account</a>
+                <a href="my_orders.php"><i class="fas fa-angle-right"></i>My Orders</a>
+                <a href="my_wishlist.php"><i class="fas fa-angle-right"></i>My Wishlist</a>
+                <a href="support.php"><i class="fas fa-angle-right"></i>Ask Questions</a>
+                <a href="terms.php"><i class="fas fa-angle-right"></i>Terms of Use</a>
+                <a href="privacy.php"><i class="fas fa-angle-right"></i>Privacy Policy</a>
+            </div>
+            <div class="box">
+                <h3>Contact Info</h3>
+                <a href="#"><i class="fas fa-phone"></i>+91-7241142006</a>
+                <a href="#"><i class="fas fa-phone"></i>+91-9705745856</a>
+                <a href="#"><i class="fas fa-envelope"></i>travelutsav@gmail.com</a>
+                <a href="#"><i class="fas fa-map"></i>Indore, Madhya Pradesh - 452001</a>
+            </div>
+            <div class="box">
+                <h3>Follow Us</h3>
+                <a href="#"><i class="fab fa-facebook-f"></i>Facebook</a>
+                <a href="#"><i class="fab fa-twitter"></i>Twitter</a>
+                <a href="#"><i class="fab fa-instagram"></i>Instagram</a>
+                <a href="#"><i class="fab fa-linkedin"></i>LinkedIn</a>
+                <a href="#"><i class="fab fa-github"></i>Github</a>
+            </div>
+        </div>
+        <div class="credit">Created by <span>Travel Utsav</span> | All Rights Reserved</div>
+    </section>
+
+    <!-- custom js file link -->
+    <script>
+        // Menu button functionality
+        document.querySelector('#menu-btn').onclick = () => {
+            document.querySelector('.navbar').classList.toggle('active');
+        }
+
+        // Search button functionality
+        document.querySelector('#search-btn').onclick = () => {
+            document.querySelector('.search-form').classList.toggle('active');
+        }
+
+        // Get URL parameters to display booking details
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const bookingName = urlParams.get('name');
+            const bookingAmount = urlParams.get('amount');
+            
+            if(bookingName) {
+                document.getElementById('booking-details').value = bookingName;
+                document.getElementById('debit-booking-details').value = bookingName;
+                document.getElementById('upi-booking-details').value = bookingName;
+                document.getElementById('netbank-booking-details').value = bookingName;
+            }
+            
+            if(bookingAmount) {
+                // Update display values
+                document.getElementById('amount').value = '₹' + bookingAmount;
+                document.getElementById('debit-amount').value = '₹' + bookingAmount;
+                document.getElementById('upi-amount').value = '₹' + bookingAmount;
+                document.getElementById('netbank-amount').value = '₹' + bookingAmount;
+                
+                // Update hidden values for form submission
+                document.getElementById('amount_value').value = bookingAmount;
+                document.getElementById('debit_amount_value').value = bookingAmount;
+                document.getElementById('upi_amount_value').value = bookingAmount;
+                document.getElementById('netbank_amount_value').value = bookingAmount;
+            }
+        }
+        
+        // Show the appropriate payment form based on selection
+        function showPaymentForm(formId) {
+            // Hide all forms first
+            document.getElementById('credit-card-form').style.display = 'none';
+            document.getElementById('debit-card-form').style.display = 'none';
+            document.getElementById('upi-form').style.display = 'none';
+            document.getElementById('net-banking-form').style.display = 'none';
+            
+            // Show the selected form
+            document.getElementById(formId).style.display = 'grid';
+        }
+    </script>
+</body>
+</html> 

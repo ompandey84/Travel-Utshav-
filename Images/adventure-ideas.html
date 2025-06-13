@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adventure Ideas - Travel Utsav</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="emergency.css">
+    <style>
+        .hero-section {
+            height: 500px;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../ImagesFinal/adventure-banner.jpg);
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 20px;
+        }
+        
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero-content p {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+        }
+        
+        .adventure-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            color: #219150;
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background: #219150;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .adventure-card {
+            display: flex;
+            margin-bottom: 80px;
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .adventure-card:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .adventure-image {
+            flex: 1;
+            min-height: 400px;
+        }
+        
+        .adventure-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .adventure-content {
+            flex: 1;
+            padding: 40px;
+        }
+        
+        .adventure-title {
+            font-size: 2.5rem;
+            color: #219150;
+            margin-bottom: 20px;
+        }
+        
+        .adventure-text {
+            font-size: 1.6rem;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .adventure-details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .detail-item {
+            display: flex;
+            align-items: center;
+            font-size: 1.4rem;
+            color: #666;
+        }
+        
+        .detail-item i {
+            color: #219150;
+            margin-right: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .adventure-actions {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #219150;
+            color: #219150;
+        }
+        
+        .btn-secondary:hover {
+            background: #219150;
+            color: white;
+        }
+        
+        .adventure-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .grid-card {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .grid-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .grid-image {
+            height: 250px;
+        }
+        
+        .grid-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .grid-content {
+            padding: 25px;
+        }
+        
+        .grid-title {
+            font-size: 2.2rem;
+            color: #219150;
+            margin-bottom: 15px;
+        }
+        
+        .grid-text {
+            font-size: 1.5rem;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        .cta-section {
+            background: linear-gradient(rgba(33, 145, 80, 0.9), rgba(33, 145, 80, 0.9)), url(../ImagesFinal/cta-bg.jpg);
+            background-size: cover;
+            background-position: center;
+            padding: 80px 20px;
+            text-align: center;
+            color: white;
+            margin: 50px 0;
+        }
+        
+        .cta-title {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta-text {
+            font-size: 1.8rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .cta-btn {
+            background: white;
+            color: #219150;
+            padding: 15px 30px;
+            font-size: 1.8rem;
+            border-radius: 5px;
+            display: inline-block;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .cta-btn:hover {
+            background: #f0f0f0;
+            transform: translateY(-5px);
+        }
+        
+        @media (max-width: 992px) {
+            .adventure-card {
+                flex-direction: column;
+            }
+            
+            .adventure-card:nth-child(even) {
+                flex-direction: column;
+            }
+            
+            .adventure-image {
+                min-height: 300px;
+            }
+            
+            .adventure-content {
+                padding: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                height: 400px;
+            }
+            
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+            
+            .hero-content p {
+                font-size: 1.6rem;
+            }
+            
+            .adventure-title {
+                font-size: 2.2rem;
+            }
+            
+            .grid-card {
+                max-width: 400px;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- header section -->
+    <header class="header">
+        <a href="home.html" class="logo"><i class="fas fa-paper-plane"></i> Travel Utsav</a>
+        <nav class="navbar">
+            <a href="home.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="packages.html">Packages</a>
+            <a href="shop.html">Shop</a>
+            <a href="adventure-ideas.html">Adventures</a>
+            <a href="blogs.html">Blogs</a>
+            <a href="reviews.html">Reviews</a>
+            <a href="chat.html">AI Assistant</a>
+        </nav>
+        <div class="icons">
+            <div id="menu-btn" class="fas fa-bars"></div>
+            <a href="shop.html" class="fas fa-shopping-cart"></a>
+            <div id="search-btn" class="fas fa-search"></div>
+        </div>
+        <form action="" class="search-form">
+            <input type="search" name="" placeholder="search here..." id="search-box">
+            <label for="search-box" class="fas fa-search"></label>
+        </form>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Adventure Ideas</h1>
+            <p>Discover thrilling adventures that will challenge your limits and create lifelong memories. Based in Indore, Madhya Pradesh, we offer experiences for adventurers of all levels.</p>
+            <a href="packages.html" class="btn">Explore Packages</a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="adventure-container">
+        <h2 class="section-title">Featured Adventures</h2>
+        
+        <!-- Featured Adventures (Larger Cards) -->
+        <div class="adventure-card">
+            <div class="adventure-image">
+                <img src="../ImagesFinal/Canoeing.jpg" alt="Canoeing Adventure">
+            </div>
+            <div class="adventure-content">
+                <h3 class="adventure-title">Canoeing Adventure</h3>
+                <p class="adventure-text">Experience the thrill of canoeing through beautiful waters with our expert-led Canoeing Adventure. Suitable for beginners and experienced paddlers alike, this adventure offers a perfect balance of excitement and tranquility as you navigate through scenic waterways around Indore, Madhya Pradesh.</p>
+                <p class="adventure-text">Our professional guides will teach you proper paddling techniques, help you navigate through gentle currents, and point out the local wildlife and natural attractions along the way.</p>
+                
+                <div class="adventure-details">
+                    <div class="detail-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Duration: 1-2 Days</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-user-friends"></i>
+                        <span>Group Size: 4-12 People</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-bolt"></i>
+                        <span>Difficulty: Easy to Moderate</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Starting Point: Indore, MP</span>
+                    </div>
+                </div>
+                
+                <div class="adventure-actions">
+                    <a href="package-details.html?name=Canoeing%20Adventure&amount=250" class="btn">View Details</a>
+                    <a href="payment.html?name=Canoeing%20Adventure&amount=250" class="btn btn-secondary">Book Now</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="adventure-card">
+            <div class="adventure-image">
+                <img src="../ImagesFinal/jump.jpg" alt="Bungee Jumping">
+            </div>
+            <div class="adventure-content">
+                <h3 class="adventure-title">Bungee Jump Adventure</h3>
+                <p class="adventure-text">Take the leap of faith with our Bungee Jump Adventure! Feel the ultimate adrenaline rush as you jump from a high platform with nothing but an elastic cord attached to your ankles. Our professional staff ensures complete safety while you experience this thrilling activity at one of the most scenic locations in India.</p>
+                <p class="adventure-text">Before your jump, our expert instructors will provide a comprehensive safety briefing, help you with proper gear fitting, and offer tips to make your jump a perfect experience. All equipment meets international safety standards.</p>
+                
+                <div class="adventure-details">
+                    <div class="detail-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Duration: 1 Day</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-user-friends"></i>
+                        <span>Group Size: Individual or Group</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-bolt"></i>
+                        <span>Difficulty: Adventurous</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Location: Rishikesh, Uttarakhand</span>
+                    </div>
+                </div>
+                
+                <div class="adventure-actions">
+                    <a href="package-details.html?name=Bungee%20Jump%20Adventure&amount=350" class="btn">View Details</a>
+                    <a href="payment.html?name=Bungee%20Jump%20Adventure&amount=350" class="btn btn-secondary">Book Now</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="adventure-card">
+            <div class="adventure-image">
+                <img src="../ImagesFinal/zip.jpg" alt="Zip Line Adventure">
+            </div>
+            <div class="adventure-content">
+                <h3 class="adventure-title">Zip Line Adventure</h3>
+                <p class="adventure-text">Soar through the air on our exhilarating Zip Line Adventure! Glide across valleys, forests, and breathtaking landscapes while safely harnessed to our premium zip line equipment. Experience the sensation of flying while taking in panoramic views of nature's beauty below.</p>
+                <p class="adventure-text">Our zip line courses vary in length and height, offering different levels of thrill for everyone from families with children to extreme adventure seekers. Each course is professionally designed and maintained with double safety systems.</p>
+                
+                <div class="adventure-details">
+                    <div class="detail-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Duration: 1 Day</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-user-friends"></i>
+                        <span>Group Size: 5-20 People</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-bolt"></i>
+                        <span>Difficulty: Easy</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Multiple Locations from Indore</span>
+                    </div>
+                </div>
+                
+                <div class="adventure-actions">
+                    <a href="package-details.html?name=Zip%20Line%20Adventure&amount=300" class="btn">View Details</a>
+                    <a href="payment.html?name=Zip%20Line%20Adventure&amount=300" class="btn btn-secondary">Book Now</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- More Adventure Options -->
+        <h2 class="section-title">More Adventure Ideas</h2>
+        
+        <div class="adventure-grid">
+            <div class="grid-card">
+                <div class="grid-image">
+                    <img src="../ImagesFinal/kayaking.jpg" alt="Kayaking">
+                </div>
+                <div class="grid-content">
+                    <h3 class="grid-title">Kayaking Adventure</h3>
+                    <p class="grid-text">Paddle through serene lakes or tackle thrilling rapids with our kayaking adventures. Perfect for both beginners and experienced paddlers.</p>
+                    <a href="package-details.html?name=Kayaking%20Adventure&amount=275" class="btn">Learn More</a>
+                </div>
+            </div>
+            
+            <div class="grid-card">
+                <div class="grid-image">
+                    <img src="../ImagesFinal/memory.jpg" alt="Outdoor Adventure">
+                </div>
+                <div class="grid-content">
+                    <h3 class="grid-title">Memorable Outdoor Adventure</h3>
+                    <p class="grid-text">A comprehensive outdoor experience combining hiking, camping, wildlife spotting, and cultural encounters in Madhya Pradesh.</p>
+                    <a href="package-details.html?name=Memorable%20Outdoor%20Adventure%20Package&amount=400" class="btn">Learn More</a>
+                </div>
+            </div>
+            
+            <div class="grid-card">
+                <div class="grid-image">
+                    <img src="../ImagesFinal/paragliding.jpg" alt="Paragliding">
+                </div>
+                <div class="grid-content">
+                    <h3 class="grid-title">Paragliding Experience</h3>
+                    <p class="grid-text">Soar like a bird and enjoy breathtaking aerial views of valleys, mountains, and landscapes with our paragliding experiences.</p>
+                    <a href="package-details.html?name=Paragliding%20Experience&amount=350" class="btn">Learn More</a>
+                </div>
+            </div>
+            
+            <div class="grid-card">
+                <div class="grid-image">
+                    <img src="../ImagesFinal/rock-climbing.jpg" alt="Rock Climbing">
+                </div>
+                <div class="grid-content">
+                    <h3 class="grid-title">Rock Climbing Expedition</h3>
+                    <p class="grid-text">Challenge yourself with our rock climbing expeditions suitable for all skill levels, from beginners to advanced climbers.</p>
+                    <a href="package-details.html?name=Rock%20Climbing%20Expedition&amount=300" class="btn">Learn More</a>
+                </div>
+            </div>
+            
+            <div class="grid-card">
+                <div class="grid-image">
+                    <img src="../ImagesFinal/trekking.jpg" alt="Trekking">
+                </div>
+                <div class="grid-content">
+                    <h3 class="grid-title">Mountain Trekking</h3>
+                    <p class="grid-text">Explore scenic mountain trails with our guided trekking expeditions. Enjoy nature, wildlife, and breathtaking views.</p>
+                    <a href="package-details.html?name=Mountain%20Trekking&amount=320" class="btn">Learn More</a>
+                </div>
+            </div>
+            
+            <div class="grid-card">
+                <div class="grid-image">
+                    <img src="../ImagesFinal/rafting.jpg" alt="River Rafting">
+                </div>
+                <div class="grid-content">
+                    <h3 class="grid-title">River Rafting</h3>
+                    <p class="grid-text">Experience the thrill of navigating through rapids with our river rafting adventures on some of India's most exciting rivers.</p>
+                    <a href="package-details.html?name=River%20Rafting%20Adventure&amount=280" class="btn">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <h2 class="cta-title">Ready for Your Adventure?</h2>
+        <p class="cta-text">Life is either a daring adventure or nothing at all. Book your next thrilling experience with Travel Utsav and create memories that will last a lifetime.</p>
+        <a href="packages.html" class="cta-btn">View All Packages</a>
+    </section>
+
+    <!-- footer section -->
+    <section class="footer">
+        <div class="box-container">
+            <div class="box">
+                <h3>Quick Links</h3>
+                <a href="home.html"><i class="fas fa-angle-right"></i>Home</a>
+                <a href="about.html"><i class="fas fa-angle-right"></i>About</a>
+                <a href="packages.html"><i class="fas fa-angle-right"></i>Packages</a>
+                <a href="shop.html"><i class="fas fa-angle-right"></i>Shop</a>
+                <a href="adventure-ideas.html"><i class="fas fa-angle-right"></i>Adventures</a>
+                <a href="reviews.html"><i class="fas fa-angle-right"></i>Reviews</a>
+                <a href="blogs.html"><i class="fas fa-angle-right"></i>Blogs</a>
+            </div>
+            <div class="box">
+                <h3>Extra Links</h3>
+                <a href="#"><i class="fas fa-angle-right"></i>My Account</a>
+                <a href="#"><i class="fas fa-angle-right"></i>My Order</a>
+                <a href="#"><i class="fas fa-angle-right"></i>My Wishlist</a>
+                <a href="#"><i class="fas fa-angle-right"></i>Ask Questions</a>
+                <a href="#"><i class="fas fa-angle-right"></i>Terms of Use</a>
+                <a href="#"><i class="fas fa-angle-right"></i>Privacy Policy</a>
+            </div>
+            <div class="box">
+                <h3>Contact Info</h3>
+                <a href="#"><i class="fas fa-phone"></i>+91-7241142006</a>
+                <a href="#"><i class="fas fa-phone"></i>+91-9705745856</a>
+                <a href="#"><i class="fas fa-envelope"></i>travelutsav@gmail.com</a>
+                <a href="#"><i class="fas fa-map"></i>Indore, Madhya Pradesh - 452001</a>
+            </div>
+            <div class="box">
+                <h3>Follow Us</h3>
+                <a href="#"><i class="fab fa-facebook-f"></i>Facebook</a>
+                <a href="#"><i class="fab fa-twitter"></i>Twitter</a>
+                <a href="#"><i class="fab fa-instagram"></i>Instagram</a>
+                <a href="#"><i class="fab fa-linkedin"></i>LinkedIn</a>
+                <a href="#"><i class="fab fa-github"></i>Github</a>
+            </div>
+        </div>
+        <div class="credit">Created by <span>Travel Utsav</span> | All Rights Reserved</div>
+    </section>
+
+    <!-- custom js file link -->
+    <script>
+        // Menu button functionality
+        document.querySelector('#menu-btn').onclick = () => {
+            document.querySelector('.navbar').classList.toggle('active');
+        }
+
+        // Search button functionality
+        document.querySelector('#search-btn').onclick = () => {
+            document.querySelector('.search-form').classList.toggle('active');
+        }
+    </script>
+    <script src="emergency.js"></script>
+</body>
+</html> 

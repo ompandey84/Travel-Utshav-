@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Utsav - AI Travel Assistant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="home.css">
+    <style>
+        .chat-container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 70vh;
+        }
+        
+        .chat-header {
+            background: #219150;
+            color: #fff;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .chat-header h3 {
+            font-size: 2rem;
+            margin: 0;
+        }
+        
+        .chat-header .ai-icon {
+            font-size: 2.4rem;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .message {
+            display: flex;
+            gap: 1.5rem;
+            max-width: 80%;
+        }
+        
+        .message.user-message {
+            align-self: flex-end;
+            flex-direction: row-reverse;
+        }
+        
+        .message.ai-message {
+            align-self: flex-start;
+        }
+        
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .user-message .message-avatar {
+            background: #219150;
+            color: #fff;
+        }
+        
+        .ai-message .message-avatar {
+            background: #4285F4;
+            color: #fff;
+        }
+        
+        .message-content {
+            background: #f5f5f5;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            position: relative;
+            font-size: 1.6rem;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .user-message .message-content {
+            background: #e6f7ef;
+            border-top-right-radius: 0;
+        }
+        
+        .ai-message .message-content {
+            background: #f0f6ff;
+            border-top-left-radius: 0;
+        }
+        
+        .message-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+        }
+        
+        .user-message .message-content::before {
+            right: -10px;
+            border-left-color: #e6f7ef;
+            border-right: 0;
+        }
+        
+        .ai-message .message-content::before {
+            left: -10px;
+            border-right-color: #f0f6ff;
+            border-left: 0;
+        }
+        
+        .chat-input {
+            display: flex;
+            padding: 1.5rem;
+            background: #f9f9f9;
+            border-top: 1px solid #eee;
+        }
+        
+        .chat-input input {
+            flex: 1;
+            padding: 1.2rem 1.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5rem;
+            font-size: 1.6rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .chat-input input:focus {
+            border-color: #219150;
+        }
+        
+        .chat-input button {
+            background: #219150;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            margin-left: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+        
+        .chat-input button:hover {
+            background: #1a7b42;
+        }
+        
+        .chat-input button i {
+            font-size: 1.8rem;
+        }
+        
+        .destination-suggestions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+            padding: 0 1.5rem;
+        }
+        
+        .suggestion-chip {
+            background: #f0f6ff;
+            padding: 0.8rem 1.5rem;
+            border-radius: 2rem;
+            color: #333;
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+        
+        .suggestion-chip:hover {
+            background: #219150;
+            color: #fff;
+        }
+        
+        .loading {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #777;
+            font-style: italic;
+        }
+        
+        .loading-dots {
+            display: flex;
+            gap: 0.3rem;
+        }
+        
+        .loading-dot {
+            width: 8px;
+            height: 8px;
+            background: #219150;
+            border-radius: 50%;
+            animation: dotPulse 1.5s infinite;
+        }
+        
+        .loading-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .loading-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes dotPulse {
+            0%, 100% {
+                opacity: 0.4;
+                transform: scale(0.8);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .intro-message {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
+        
+        .intro-message h3 {
+            font-size: 2.4rem;
+            color: #219150;
+            margin-bottom: 1rem;
+        }
+        
+        .intro-message p {
+            font-size: 1.6rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        
+        .image-result {
+            max-width: 100%;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .chat-features {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            flex: 1;
+            min-width: 250px;
+            background: #fff;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 0.3rem 1rem rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: #219150;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-title {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-description {
+            font-size: 1.4rem;
+            color: #666;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="#" class="logo"><i class="fas fa-hiking"></i>travel Utsav</a>
+        
+        <nav class="navbar">
+            <div id="nav-close" class="fas fa-times"></div>
+            <a href="home.html">home</a>
+            <a href="home.html#about">about</a>
+            <a href="packages.html">packages</a>
+            <a href="home.html#reviews">reviews</a>
+            <a href="home.html#blogs">blogs</a>
+            <a href="chat.html">AI Assistant</a>
+        </nav>
+        <div class="icons">
+            <div id="menu-btn" class="fas fa-bars"></div>
+            <div id="search-btn" class="fas fa-search"></div>
+            <a href="shop.html" class="fas fa-shopping-cart"></a>
+            <a href="./travelPage.html" class="fa-solid fa-motorcycle"></a>
+            <a href="../group_chat.php" class="fa-solid fa-comments"></a>
+            <a href="../auth.php" class="fa-regular fa-user"></a>
+        </div>
+    </header>
+
+    <div class="search-form">
+        <div id="close-search" class="fas fa-times"></div>
+        <form action="search-results.html" method="GET">
+            <input type="search" name="query" placeholder="search here..." id="search-box">
+            <label for="search-box" class="fas fa-search"></label>
+        </form>
+    </div>
+
+    <section style="margin-top: 8rem; padding-bottom: 3rem;">
+        <h1 class="heading">AI Travel Assistant</h1>
+        <p style="text-align: center; font-size: 1.8rem; margin-bottom: 3rem;">Powered by Google Gemini - Ask anything about destinations or travel planning!</p>
+        
+        <div class="chat-container">
+            <div class="chat-header">
+                <div class="ai-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3>Travel Utsav AI Assistant</h3>
+            </div>
+            
+            <div class="chat-messages" id="chat-messages">
+                <div class="intro-message">
+                    <h3>Welcome to Travel Utsav AI Assistant!</h3>
+                    <p>I can help you plan your perfect trip from Indore, Madhya Pradesh. Ask me about destinations, travel tips, or local attractions. Here are some things you can ask me:</p>
+                    
+                    <div class="destination-suggestions">
+                        <span class="suggestion-chip" onclick="suggestQuery(this)">Best time to visit Ujjain?</span>
+                        <span class="suggestion-chip" onclick="suggestQuery(this)">Weekend getaways from Indore</span>
+                        <span class="suggestion-chip" onclick="suggestQuery(this)">Things to do in Pachmarhi</span>
+                        <span class="suggestion-chip" onclick="suggestQuery(this)">How to reach Khajuraho from Indore?</span>
+                        <span class="suggestion-chip" onclick="suggestQuery(this)">Best street food in Indore</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chat-input">
+                <input 
+                    type="text" 
+                    id="user-input" 
+                    placeholder="Ask about destinations or travel tips..." 
+                    onkeypress="handleKeyPress(event)"
+                >
+                <button onclick="sendMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        
+        <div class="chat-features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <h3 class="feature-title">Destination Insights</h3>
+                <p class="feature-description">Get detailed information about any travel destination including attractions, local customs, and hidden gems.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-calendar-alt"></i>
+                </div>
+                <h3 class="feature-title">Trip Planning</h3>
+                <p class="feature-description">Get help creating itineraries, estimating budgets, and organizing your travel schedule efficiently.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h3 class="feature-title">Local Recommendations</h3>
+                <p class="feature-description">Discover authentic experiences, restaurants, and activities recommended by locals and seasoned travelers.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="footer">
+        <div class="box-container">
+            <div class="box">
+                <h3>Quick Links</h3>
+                <a href="home.html#home">home</a>
+                <a href="home.html#about">about</a>
+                <a href="shop.html">shop</a>
+                <a href="packages.html">packages</a>
+                <a href="home.html#reviews">reviews</a>
+                <a href="home.html#blogs">blogs</a>
+                <a href="chat.html">AI Assistant</a>
+                <a href="./reviews.html">add reviews</a>
+            </div>
+            <div class="box">
+                <h3>Extra Links</h3>
+                <a href="#">My Account</a>
+                <a href="#">My Order</a>
+                <a href="#">Whishlist</a>
+                <a href="#">Any Question </a>
+                <a href="#">Terms of Use</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="box">
+                <h3>Contact Information</h3>
+                <a href="#"><i class="fas fa-phone"></i>+91-7241142006</a>
+                <a href="#"><i class="fas fa-phone"></i>+91-9705745856</a>
+                <a href="#"><i class="fas fa-envelope"></i>travel_utsav@gmail.com</a>
+                <a href="#"><i class="fas fa-map"></i>indore, Madhya Pradesh - 451010</a>
+            </div>
+            <div class="box">
+                <a href="#"><i class="fab fa-facebook-f"></i>facebook</a>
+                <a href="#"><i class="fab fa-twitter"></i>Twitter</a>
+                <a href="#"><i class="fab fa-instagram"></i>Instagram</a>
+                <a href="#"><i class="fab fa-github"></i>Github</a>
+            </div>
+        </div>
+        <div class="credit">Created By <span>Travel Utsav Team</span> | All Rights Reserved</div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="home.js"></script>
+    
+    <script>
+        // Gemini API configuration
+        const API_KEY = "AIzaSyDbvseolJM52m_U0LBNGZI-9bgrekOvqSM";
+        const API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent";
+        
+        // Chat history
+        let chatMessages = [];
+        
+        // Function to handle user message submission
+        function sendMessage() {
+            const userInput = document.getElementById('user-input');
+            const userMessage = userInput.value.trim();
+            
+            if (userMessage === '') return;
+            
+            // Add user message to chat
+            addMessageToChat('user', userMessage);
+            
+            // Clear input field
+            userInput.value = '';
+            
+            // Show loading indicator
+            showLoadingIndicator();
+            
+            // Send to Gemini API
+            fetchGeminiResponse(userMessage);
+        }
+        
+        // Function to handle Enter key press
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+        
+        // Function to add message to chat display
+        function addMessageToChat(sender, message) {
+            const chatMessagesElement = document.getElementById('chat-messages');
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            
+            if (sender === 'user') {
+                messageElement.classList.add('user-message');
+                chatMessages.push({ role: 'user', parts: [{ text: message }] });
+                
+                messageElement.innerHTML = `
+                    <div class="message-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="message-content">${message}</div>
+                `;
+            } else {
+                messageElement.classList.add('ai-message');
+                chatMessages.push({ role: 'model', parts: [{ text: message }] });
+                
+                // Process message for links and formatting
+                const formattedMessage = formatMessage(message);
+                
+                messageElement.innerHTML = `
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">${formattedMessage}</div>
+                `;
+            }
+            
+            chatMessagesElement.appendChild(messageElement);
+            
+            // Scroll to bottom of chat
+            chatMessagesElement.scrollTop = chatMessagesElement.scrollHeight;
+        }
+        
+        // Function to format message (add links, formatting, etc.)
+        function formatMessage(message) {
+            // Convert URLs to links
+            message = message.replace(
+                /(https?:\/\/[^\s]+)/g, 
+                '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>'
+            );
+            
+            // Convert line breaks to <br>
+            message = message.replace(/\n/g, '<br>');
+            
+            return message;
+        }
+        
+        // Function to show loading indicator
+        function showLoadingIndicator() {
+            const chatMessagesElement = document.getElementById('chat-messages');
+            const loadingElement = document.createElement('div');
+            loadingElement.id = 'loading-indicator';
+            loadingElement.classList.add('message', 'ai-message');
+            
+            loadingElement.innerHTML = `
+                <div class="message-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="message-content">
+                    <div class="loading">
+                        <span>Thinking</span>
+                        <div class="loading-dots">
+                            <div class="loading-dot"></div>
+                            <div class="loading-dot"></div>
+                            <div class="loading-dot"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            chatMessagesElement.appendChild(loadingElement);
+            chatMessagesElement.scrollTop = chatMessagesElement.scrollHeight;
+        }
+        
+        // Function to remove loading indicator
+        function removeLoadingIndicator() {
+            const loadingIndicator = document.getElementById('loading-indicator');
+            if (loadingIndicator) {
+                loadingIndicator.remove();
+            }
+        }
+        
+        // Function to send request to Gemini API
+        async function fetchGeminiResponse(userMessage) {
+            try {
+                // Construct the API request
+                const requestBody = {
+                    contents: [
+                        {
+                            role: "user",
+                            parts: [
+                                {
+                                    text: `You are a helpful travel assistant focused on providing information about travel destinations, especially in and around Indore, Madhya Pradesh, India. 
+                                    Provide knowledgeable, concise answers about travel destinations, activities, local cuisine, transportation, accommodations, and travel tips.
+                                    If asked about destinations not in India, first briefly acknowledge the request, but then suggest similar alternatives in India, especially places accessible from Indore.
+                                    
+                                    User query: ${userMessage}`
+                                }
+                            ]
+                        }
+                    ],
+                    generationConfig: {
+                        temperature: 0.7,
+                        topK: 40,
+                        topP: 0.95,
+                        maxOutputTokens: 1024,
+                    }
+                };
+                
+                // Make the API call
+                const response = await fetch(`${API_URL}?key=${API_KEY}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`API request failed with status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                // Remove loading indicator
+                removeLoadingIndicator();
+                
+                // Extract and display the response
+                if (data.candidates && data.candidates.length > 0 && 
+                    data.candidates[0].content && 
+                    data.candidates[0].content.parts && 
+                    data.candidates[0].content.parts.length > 0) {
+                    
+                    const aiResponse = data.candidates[0].content.parts[0].text;
+                    addMessageToChat('ai', aiResponse);
+                } else {
+                    addMessageToChat('ai', "I'm sorry, I couldn't generate a response at the moment. Please try again.");
+                }
+                
+            } catch (error) {
+                console.error('Error calling Gemini API:', error);
+                removeLoadingIndicator();
+                addMessageToChat('ai', "I'm sorry, there was an error processing your request. Please try again later.");
+            }
+        }
+        
+        // Function to use suggestion chips
+        function suggestQuery(element) {
+            const query = element.textContent;
+            document.getElementById('user-input').value = query;
+            sendMessage();
+        }
+    </script>
+</body>
+</html> 

@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Ride - Travel Utsav</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="home.css">
+    <style>
+        body {
+            background: url(./new1.jpg) no-repeat center center fixed;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            min-height: 100vh;
+        }
+
+        .main-container {
+            display: flex;
+            justify-content: space-between;
+            padding: 8rem 2rem 2rem;
+            flex-wrap: wrap;
+        }
+
+        .book-ride-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 45%;
+            min-width: 350px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .map-container {
+            width: 45%;
+            min-width: 350px;
+            height: 500px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .book-ride-container h1 {
+            margin-bottom: 20px;
+            color: #219150;
+        }
+
+        .ride-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form-group {
+            text-align: left;
+        }
+
+        label {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #219150;
+            box-shadow: 0 0 5px rgba(33, 145, 80, 0.5);
+        }
+
+        .submit-btn {
+            background-color: #219150;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #1a7b42;
+        }
+
+        .auth-options {
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .auth-options a {
+            color: #219150;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+
+        .auth-options a:hover {
+            text-decoration: underline;
+        }
+
+        .popular-routes {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .popular-routes h3 {
+            color: #219150;
+            margin-bottom: 10px;
+        }
+
+        .route-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .route-chip {
+            background-color: #f0f6ff;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .route-chip:hover {
+            background-color: #219150;
+            color: white;
+        }
+
+        @media (max-width: 992px) {
+            .main-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .book-ride-container, .map-container {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="home.html" class="logo"><i class="fas fa-hiking"></i>travel Utsav</a>
+        
+        <nav class="navbar">
+            <div id="nav-close" class="fas fa-times"></div>
+            <a href="home.html">home</a>
+            <a href="home.html#about">about</a>
+            <a href="packages.html">packages</a>
+            <a href="home.html#reviews">reviews</a>
+            <a href="home.html#blogs">blogs</a>
+            <a href="chat.html">AI Assistant</a>
+        </nav>
+        <div class="icons">
+            <div id="menu-btn" class="fas fa-bars"></div>
+            <div id="search-btn" class="fas fa-search"></div>
+            <a href="shop.html" class="fas fa-shopping-cart"></a>
+            <a href="./travelPage.html" class="fa-solid fa-motorcycle"></a>
+            <a href="../group_chat.php" class="fa-solid fa-comments"></a>
+            <a href="../auth.php" class="fa-regular fa-user"></a>
+        </div>
+    </header>
+
+    <div class="search-form">
+        <div id="close-search" class="fas fa-times"></div>
+        <form action="search-results.html" method="GET">
+            <input type="search" name="query" placeholder="search here..." id="search-box">
+            <label for="search-box" class="fas fa-search"></label>
+        </form>
+    </div>
+
+    <div class="main-container">
+        <div class="book-ride-container">
+            <h1>Book Your Ride</h1>
+            <form class="ride-form" id="ride-form">
+                <!-- Origin Input -->
+                <div class="form-group">
+                    <label for="origin">Origin:</label>
+                    <input type="text" id="origin" name="origin" placeholder="Enter your starting point" required>
+                </div>
+                <!-- Destination Input -->
+                <div class="form-group">
+                    <label for="destination">Destination:</label>
+                    <input type="text" id="destination" name="destination" placeholder="Enter your destination" required>
+                </div>
+                <!-- Date Input -->
+                <div class="form-group">
+                    <label for="date">Date:</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <!-- Time Input -->
+                <div class="form-group">
+                    <label for="time">Time:</label>
+                    <input type="time" id="time" name="time" required>
+                </div>
+                <!-- Partner Preference -->
+                <div class="form-group">
+                    <label for="partner">Partner Preference:</label>
+                    <select id="partner" name="partner" required>
+                        <option value="any">Any</option>
+                        <option value="female">Female</option>
+                        <option value="male">Male</option>
+                    </select>
+                </div>
+                <!-- Vehicle Selection -->
+                <div class="form-group">
+                    <label for="vehicle">Vehicle:</label>
+                    <select id="vehicle" name="vehicle" required>
+                        <option value="bike">Bike</option>
+                        <option value="car">Car</option>
+                    </select>
+                </div>
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn" onclick="redirectToPayment(event)">Book Now</button>
+            </form>
+
+            <div class="popular-routes">
+                <h3>Popular Routes in Indore</h3>
+                <div class="route-chips">
+                    <div class="route-chip" onclick="setRoute('Vijay Nagar', 'Rajwada')">Vijay Nagar to Rajwada</div>
+                    <div class="route-chip" onclick="setRoute('Indore Airport', 'Railway Station')">Airport to Railway Station</div>
+                    <div class="route-chip" onclick="setRoute('IIM Indore', 'Sarafa Bazaar')">IIM to Sarafa</div>
+                    <div class="route-chip" onclick="setRoute('Palasia', 'Bhawarkuan')">Palasia to Bhawarkuan</div>
+                    <div class="route-chip" onclick="setRoute('MG Road', 'Regal Square')">MG Road to Regal Square</div>
+                </div>
+            </div>
+
+            <div class="auth-options">
+                <p>Need help? <a href="../group_chat.php">Chat with us</a></p>
+                <p>Back to Home? <a href="./home.html">Home</a></p>
+            </div>
+        </div>
+
+        <div class="map-container" id="map"></div>
+    </div>
+
+    <section class="footer">
+        <div class="box-container">
+            <div class="box">
+                <h3>Quick Links</h3>
+                <a href="home.html">home</a>
+                <a href="home.html#about">about</a>
+                <a href="shop.html">shop</a>
+                <a href="packages.html">packages</a>
+                <a href="home.html#reviews">reviews</a>
+                <a href="home.html#blogs">blogs</a>
+                <a href="chat.html">AI Assistant</a>
+                <a href="./reviews.html">add reviews</a>
+            </div>
+            <div class="box">
+                <h3>Extra Links</h3>
+                <a href="#">My Account</a>
+                <a href="#">My Order</a>
+                <a href="#">Wishlist</a>
+                <a href="#">Any Question </a>
+                <a href="#">Terms of Use</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="box">
+                <h3>Contact Information</h3>
+                <a href="#"><i class="fas fa-phone"></i>+91-7241142006</a>
+                <a href="#"><i class="fas fa-phone"></i>+91-9705745856</a>
+                <a href="#"><i class="fas fa-envelope"></i>travel_utsav@gmail.com</a>
+                <a href="#"><i class="fas fa-map"></i>indore, Madhya Pradesh - 451010</a>
+            </div>
+            <div class="box">
+                <a href="#"><i class="fab fa-facebook-f"></i>facebook</a>
+                <a href="#"><i class="fab fa-twitter"></i>Twitter</a>
+                <a href="#"><i class="fab fa-instagram"></i>Instagram</a>
+                <a href="#"><i class="fab fa-github"></i>Github</a>
+            </div>
+        </div>
+        <div class="credit">Created By <span>Travel Utsav Team</span> | All Rights Reserved</div>
+    </section>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="home.js"></script>
+    <script>
+        // Initialize the map centered on Indore, Madhya Pradesh
+        const map = L.map('map').setView([22.7196, 75.8577], 13);
+
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Add a marker for Indore
+        const indoreMarker = L.marker([22.7196, 75.8577]).addTo(map);
+        indoreMarker.bindPopup("<b>Indore</b><br>Madhya Pradesh").openPopup();
+
+        // Add markers for popular landmarks
+        const landmarks = [
+            { name: "Rajwada Palace", coords: [22.7172, 75.8545], desc: "Historical palace in Indore" },
+            { name: "Lal Bagh Palace", coords: [22.7019, 75.8792], desc: "Royal residence" },
+            { name: "Sarafa Bazaar", coords: [22.7186, 75.8530], desc: "Famous night food market" },
+            { name: "Indore Airport", coords: [22.7220, 75.8010], desc: "Devi Ahilyabai Holkar Airport" },
+            { name: "IIM Indore", coords: [22.6253, 75.7682], desc: "Indian Institute of Management" },
+            { name: "Patalpani Waterfall", coords: [22.5700, 75.8850], desc: "Scenic waterfall" }
+        ];
+
+        landmarks.forEach(landmark => {
+            const marker = L.marker(landmark.coords).addTo(map);
+            marker.bindPopup(`<b>${landmark.name}</b><br>${landmark.desc}`);
+        });
+
+        // Function to populate form with selected route
+        function setRoute(origin, destination) {
+            document.getElementById('origin').value = origin;
+            document.getElementById('destination').value = destination;
+            
+            // Set today's date as default
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('date').value = today;
+            
+            // Set current time + 1 hour as default
+            const now = new Date();
+            now.setHours(now.getHours() + 1);
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            document.getElementById('time').value = `${hours}:${minutes}`;
+        }
+
+        // Form submission handler
+        document.getElementById('ride-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const origin = document.getElementById('origin').value;
+            const destination = document.getElementById('destination').value;
+            
+            // Clear previous route
+            map.eachLayer(layer => {
+                if (layer instanceof L.Polyline) {
+                    map.removeLayer(layer);
+                }
+            });
+            
+            // Simulate a route (in a real app, you'd use a routing API)
+            // For demo purposes, we'll create a simple line between random points near origin and destination
+            const originCoords = getApproximateCoords(origin);
+            const destCoords = getApproximateCoords(destination);
+            
+            const polyline = L.polyline([originCoords, destCoords], {color: '#219150', weight: 5}).addTo(map);
+            map.fitBounds(polyline.getBounds());
+        });
+        
+        // Helper function to get approximate coordinates for demo purposes
+        function getApproximateCoords(location) {
+            // In a real app, you would use a geocoding service
+            // This is just a simple demo that returns coordinates near Indore
+            const baseCoords = [22.7196, 75.8577]; // Indore center
+            
+            // Add some randomness based on the location name's length
+            const randomLat = (location.length % 10) * 0.01;
+            const randomLng = (location.length % 7) * 0.01;
+            
+            return [baseCoords[0] + randomLat, baseCoords[1] + randomLng];
+        }
+        
+        // Set minimum date to today for the date input
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('date').setAttribute('min', today);
+
+        // Function to redirect to payment page
+        function redirectToPayment(event) {
+            event.preventDefault();
+            
+            const origin = document.getElementById('origin').value;
+            const destination = document.getElementById('destination').value;
+            const date = document.getElementById('date').value;
+            const vehicle = document.getElementById('vehicle').value;
+            
+            if (!origin || !destination || !date) {
+                alert("Please fill in all required fields");
+                return;
+            }
+            
+            // Calculate approximate price based on vehicle type
+            const basePrice = vehicle === 'bike' ? 150 : 300;
+            
+            const bookingName = `${origin} to ${destination} (${vehicle})`;
+            const encodedName = encodeURIComponent(bookingName);
+            
+            window.location.href = `payment.html?name=${encodedName}&amount=${basePrice}`;
+        }
+    </script>
+</body>
+</html>

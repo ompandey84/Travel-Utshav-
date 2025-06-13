@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Utsav - Shop</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="home.css">
+    <style>
+        .product-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .product-card {
+            background: #fff;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+        }
+        
+        .product-image {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+        
+        .product-icons {
+            position: absolute;
+            bottom: -100%;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            transition: bottom 0.3s ease;
+        }
+        
+        .product-card:hover .product-icons {
+            bottom: 0;
+        }
+        
+        .product-icons a {
+            font-size: 2rem;
+            color: #fff;
+            transition: color 0.3s ease;
+        }
+        
+        .product-icons a:hover {
+            color: #219150;
+        }
+        
+        .product-details {
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .product-details h3 {
+            font-size: 2.2rem;
+            color: #10221b;
+            margin-bottom: 1rem;
+        }
+        
+        .product-price {
+            font-size: 1.8rem;
+            color: #219150;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .product-stars {
+            color: #f39c12;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+        
+        .product-category {
+            margin-top: 2rem;
+            margin-bottom: 4rem;
+        }
+        
+        .category-heading {
+            font-size: 2.4rem;
+            font-weight: 600;
+            color: #10221b;
+            border-left: 0.5rem solid #219150;
+            padding-left: 1rem;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="#" class="logo"><i class="fas fa-hiking"></i>travel Utsav</a>
+        
+        <nav class="navbar">
+            <div id="nav-close" class="fas fa-times"></div>
+            <a href="home.html">home</a>
+            <a href="home.html#about">about</a>
+            <a href="shop.html">shop</a>
+            <a href="packages.html">packages</a>
+            <a href="home.html#reviews">reviews</a>
+            <a href="home.html#blogs">blogs</a>
+        </nav>
+        <div class="icons">
+            <div id="menu-btn" class="fas fa-bars"></div>
+            <a href="shop.html" class="fas fa-shopping-cart"></a>
+            <div id="search-btn" class="fas fa-search"></div>
+            <a href="./travelPage.html" class="fa-solid fa-motorcycle"></a>
+            <a href="login.html" class="fa-regular fa-user"></a>
+        </div>
+    </header>
+
+    <div class="search-form">
+        <div id="close-search" class="fas fa-times"></div>
+        <form action="">
+            <input type="search" name="" placeholder="search here..." id="search-box">
+            <label for="search-box" class="fas fa-search"></label>
+        </form>
+    </div>
+
+    <section class="shop" style="margin-top: 8rem;">
+        <h1 class="heading">Adventure Shop</h1>
+        <p style="text-align: center; font-size: 1.8rem; margin-bottom: 3rem;">Discover high-quality gear for all your adventure needs</p>
+        
+        <div class="product-category">
+            <h2 class="category-heading">Survival Kits</h2>
+            <div class="product-container">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="../ImagesFinal/bags.jpg" alt="Adventure Backpack">
+                        <div class="product-icons">
+                            <a href="https://www.amazon.in/Carbonado-Multipurpose-Utility-Motorcycling-Adventure/dp/B0B4SRQSBK/" class="fas fa-shopping-cart"></a>
+                            <a href="https://www.amazon.in/Carbonado-Multipurpose-Utility-Motorcycling-Adventure/dp/B0B4SRQSBK/" class="fas fa-eye"></a>
+                            <a href="https://www.amazon.in/Carbonado-Multipurpose-Utility-Motorcycling-Adventure/dp/B0B4SRQSBK/" class="fas fa-share"></a>
+                        </div>
+                    </div>
+                    <div class="product-details">
+                        <h3>Adventure Backpack</h3>
+                        <div class="product-price">$10.00 - $20.00</div>
+                        <div class="product-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p>Durable, water-resistant backpack with multiple compartments perfect for adventure travel</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="../ImagesFinal/knife.jpg" alt="Survival Knife">
+                        <div class="product-icons">
+                            <a href="https://www.amazon.in/STANLEY-FMHT0-10312-Premium-Pocket-Silver/dp/B01MXTRVEG/" class="fas fa-shopping-cart"></a>
+                            <a href="https://www.amazon.in/STANLEY-FMHT0-10312-Premium-Pocket-Silver/dp/B01MXTRVEG/" class="fas fa-eye"></a>
+                            <a href="https://www.amazon.in/STANLEY-FMHT0-10312-Premium-Pocket-Silver/dp/B01MXTRVEG/" class="fas fa-share"></a>
+                        </div>
+                    </div>
+                    <div class="product-details">
+                        <h3>Premium Pocket Knife</h3>
+                        <div class="product-price">$5.00 - $20.00</div>
+                        <div class="product-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p>Multi-purpose survival knife with stainless steel blade and ergonomic handle</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="../ImagesFinal/glass.jpg" alt="Protective Glasses">
+                        <div class="product-icons">
+                            <a href="https://www.amazon.in/OTOROYS-Scratch-Protective-Windproof-Detachable/dp/B0BSXG82NV/" class="fas fa-shopping-cart"></a>
+                            <a href="https://www.amazon.in/OTOROYS-Scratch-Protective-Windproof-Detachable/dp/B0BSXG82NV/" class="fas fa-eye"></a>
+                            <a href="https://www.amazon.in/OTOROYS-Scratch-Protective-Windproof-Detachable/dp/B0BSXG82NV/" class="fas fa-share"></a>
+                        </div>
+                    </div>
+                    <div class="product-details">
+                        <h3>Adventure Glasses</h3>
+                        <div class="product-price">$5.00 - $15.00</div>
+                        <div class="product-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p>Scratch-resistant protective glasses with UV protection and windproof design</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="../ImagesFinal/shoes.jpg" alt="Adventure Boots">
+                        <div class="product-icons">
+                            <a href="https://www.amazon.in/Bacca-Bucci-7-Eye-Boots-Inspired/dp/B0BJ7KKPQX/" class="fas fa-shopping-cart"></a>
+                            <a href="https://www.amazon.in/Bacca-Bucci-7-Eye-Boots-Inspired/dp/B0BJ7KKPQX/" class="fas fa-eye"></a>
+                            <a href="https://www.amazon.in/Bacca-Bucci-7-Eye-Boots-Inspired/dp/B0BJ7KKPQX/" class="fas fa-share"></a>
+                        </div>
+                    </div>
+                    <div class="product-details">
+                        <h3>Hiking Boots</h3>
+                        <div class="product-price">$20.00 - $40.00</div>
+                        <div class="product-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p>Durable, water-resistant boots with excellent grip for all your adventure needs</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-category">
+            <h2 class="category-heading">Adventure Gear</h2>
+            <div class="product-container">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="../ImagesFinal/compass.jpg" alt="Hiking Compass">
+                        <div class="product-icons">
+                            <a href="#" class="fas fa-shopping-cart"></a>
+                            <a href="#" class="fas fa-eye"></a>
+                            <a href="#" class="fas fa-share"></a>
+                        </div>
+                    </div>
+                    <div class="product-details">
+                        <h3>Professional Compass</h3>
+                        <div class="product-price">$15.00 - $25.00</div>
+                        <div class="product-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>Military-grade compass with fluorescent dial and sighting lines for precise navigation</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="../ImagesFinal/tent.jpg" alt="Camping Tent">
+                        <div class="product-icons">
+                            <a href="#" class="fas fa-shopping-cart"></a>
+                            <a href="#" class="fas fa-eye"></a>
+                            <a href="#" class="fas fa-share"></a>
+                        </div>
+                    </div>
+                    <div class="product-details">
+                        <h3>Portable Camping Tent</h3>
+                        <div class="product-price">$50.00 - $120.00</div>
+                        <div class="product-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p>Waterproof, lightweight tent that's easy to set up and carry for all your camping adventures</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="../ImagesFinal/helmet.jpg" alt="Adventure Helmet">
+                        <div class="product-icons">
+                            <a href="#" class="fas fa-shopping-cart"></a>
+                            <a href="#" class="fas fa-eye"></a>
+                            <a href="#" class="fas fa-share"></a>
+                        </div>
+                    </div>
+                    <div class="product-details">
+                        <h3>Safety Helmet</h3>
+                        <div class="product-price">$30.00 - $60.00</div>
+                        <div class="product-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p>Impact-resistant helmet with adjustable fit and ventilation system for maximum comfort</p>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="../ImagesFinal/jacket.jpg" alt="Adventure Jacket">
+                        <div class="product-icons">
+                            <a href="#" class="fas fa-shopping-cart"></a>
+                            <a href="#" class="fas fa-eye"></a>
+                            <a href="#" class="fas fa-share"></a>
+                        </div>
+                    </div>
+                    <div class="product-details">
+                        <h3>Weatherproof Jacket</h3>
+                        <div class="product-price">$45.00 - $80.00</div>
+                        <div class="product-stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>All-season jacket with thermal lining, water-resistant exterior, and multiple pockets</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="footer">
+        <div class="box-container">
+            <div class="box">
+                <h3>Quick Links</h3>
+                <a href="home.html#home">home</a>
+                <a href="home.html#about">about</a>
+                <a href="shop.html">shop</a>
+                <a href="packages.html">packages</a>
+                <a href="home.html#reviews">reviews</a>
+                <a href="home.html#blogs">blogs</a>
+                <a href="./reviews.html">add reviews</a>
+            </div>
+            <div class="box">
+                <h3>Extra Links</h3>
+                <a href="#">My Account</a>
+                <a href="#">My Order</a>
+                <a href="#">Whishlist</a>
+                <a href="#">Any Question </a>
+                <a href="#">Terms of Use</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="box">
+                <h3>Contact Information</h3>
+                <a href="#"><i class="fas fa-phone"></i>+91-7241142006</a>
+                <a href="#"><i class="fas fa-phone"></i>+91-9705745856</a>
+                <a href="#"><i class="fas fa-envelope"></i>travel_utsav@gmail.com</a>
+                <a href="#"><i class="fas fa-map"></i>indore, Madhya Pradesh - 451010</a>
+            </div>
+            <div class="box">
+                <a href="#"><i class="fab fa-facebook-f"></i>facebook</a>
+                <a href="#"><i class="fab fa-twitter"></i>Twitter</a>
+                <a href="#"><i class="fab fa-instagram"></i>Instagram</a>
+                <a href="#"><i class="fab fa-github"></i>Github</a>
+            </div>
+        </div>
+        <div class="credit">Created By <span>Travel Utsav Team</span> | All Rights Reserved</div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="home.js"></script>
+</body>
+</html> 

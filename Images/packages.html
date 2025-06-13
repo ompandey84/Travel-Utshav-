@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Utsav - Packages</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="emergency.css">
+    <style>
+        .package-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+        
+        .package-card {
+            background: #fff;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .package-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+        }
+        
+        .package-image {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .package-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .package-card:hover .package-image img {
+            transform: scale(1.1);
+        }
+        
+        .package-content {
+            padding: 2rem;
+        }
+        
+        .package-content h3 {
+            font-size: 2.4rem;
+            color: #10221b;
+            margin-bottom: 1rem;
+        }
+        
+        .package-content p {
+            font-size: 1.6rem;
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        .package-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #ddd;
+        }
+        
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .detail-icon {
+            font-size: 2rem;
+            color: #219150;
+            margin-bottom: 0.5rem;
+        }
+        
+        .detail-text {
+            font-size: 1.4rem;
+            color: #666;
+        }
+        
+        .package-price {
+            font-size: 2rem;
+            color: #219150;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        
+        .package-category {
+            margin-top: 4rem;
+            margin-bottom: 5rem;
+        }
+        
+        .category-heading {
+            font-size: 3rem;
+            font-weight: 600;
+            color: #10221b;
+            text-align: center;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        
+        .category-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: #219150;
+        }
+        
+        .category-description {
+            text-align: center;
+            font-size: 1.6rem;
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto 3rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="#" class="logo"><i class="fas fa-hiking"></i>travel Utsav</a>
+        
+        <nav class="navbar">
+            <div id="nav-close" class="fas fa-times"></div>
+            <a href="home.html">home</a>
+            <a href="about.html">about</a>
+            <a href="packages.html">packages</a>
+            <a href="adventure-ideas.html">Adventures</a>
+            <a href="shop.html">shop</a>
+            <a href="reviews.html">reviews</a>
+            <a href="blogs.html">blogs</a>
+            <a href="chat.html">AI Assistant</a>
+        </nav>
+        <div class="icons">
+            <div id="menu-btn" class="fas fa-bars"></div>
+            <div id="search-btn" class="fas fa-search"></div>
+            <a href="shop.html" class="fas fa-shopping-cart"></a>
+            <a href="./travelPage.html" class="fa-solid fa-motorcycle"></a>
+            <a href="../group_chat.php" class="fa-solid fa-comments"></a>
+            <a href="../auth.php" class="fa-regular fa-user"></a>
+        </div>
+    </header>
+
+    <div class="search-form">
+        <div id="close-search" class="fas fa-times"></div>
+        <form action="search-results.html" method="GET">
+            <input type="search" name="query" placeholder="search here..." id="search-box">
+            <label for="search-box" class="fas fa-search"></label>
+        </form>
+    </div>
+
+    <section class="packages" style="margin-top: 8rem;">
+        <h1 class="heading">Explore Our Packages</h1>
+        <p style="text-align: center; font-size: 1.8rem; margin-bottom: 3rem;">Discover exciting adventures across India from Indore, Madhya Pradesh</p>
+
+        <div class="package-category">
+            <h2 class="category-heading">Mountain Adventures</h2>
+            <p class="category-description">Experience the thrill of exploring majestic mountains and breathtaking valleys</p>
+            
+            <div class="package-container">
+                <div class="package-card">
+                    <div class="package-image">
+                        <img src="../ImagesFinal/p1.jpg" alt="Solang Valley Tour">
+                    </div>
+                    <div class="package-content">
+                        <h3>Solang Valley Tour</h3>
+                        <p>Solang Valley, located near Manali in Himachal Pradesh, is renowned for its stunning landscapes and adventure activities. Our exclusive package offers a perfect blend of thrill and natural beauty.</p>
+                        
+                        <div class="package-details">
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="detail-text">5 Days</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-user-friends"></i>
+                                </div>
+                                <div class="detail-text">Max 10</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="detail-text">Himachal</div>
+                            </div>
+                        </div>
+                        
+                        <div class="package-price">$250 - $500</div>
+                        <a href="payment.html?name=Solang%20Valley%20Tour&amount=500" class="btn">Book Now</a>
+                    </div>
+                </div>
+
+                <div class="package-card">
+                    <div class="package-image">
+                        <img src="../ImagesFinal/p3.jpg" alt="Himachal 9 Days Tour">
+                    </div>
+                    <div class="package-content">
+                        <h3>Himachal 9 Days Tour</h3>
+                        <p>This comprehensive 9-day Himachal tour takes you through the region's most stunning locations including Shimla, Manali, Dharamshala, and Dalhousie, offering a perfect blend of adventure, culture, and natural beauty.</p>
+                        
+                        <div class="package-details">
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="detail-text">9 Days</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-user-friends"></i>
+                                </div>
+                                <div class="detail-text">Max 15</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="detail-text">Himachal</div>
+                            </div>
+                        </div>
+                        
+                        <div class="package-price">$450 - $800</div>
+                        <a href="payment.html?name=Himachal%209%20Days%20Tour&amount=800" class="btn">Book Now</a>
+                    </div>
+                </div>
+
+                <div class="package-card">
+                    <div class="package-image">
+                        <img src="../ImagesFinal/p5.jpg" alt="Leh Ladakh Tour">
+                    </div>
+                    <div class="package-content">
+                        <h3>Leh Ladakh Tour</h3>
+                        <p>Explore the stunning landscapes of Leh Ladakh with our premium tour package. Experience the beauty of Pangong Lake, Nubra Valley, Magnetic Hill, and ancient monasteries in this high-altitude desert paradise.</p>
+                        
+                        <div class="package-details">
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="detail-text">7 Days</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-user-friends"></i>
+                                </div>
+                                <div class="detail-text">Max 8</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="detail-text">Ladakh</div>
+                            </div>
+                        </div>
+                        
+                        <div class="package-price">$550 - $950</div>
+                        <a href="payment.html?name=Leh%20Ladakh%20Tour&amount=950" class="btn">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="package-category">
+            <h2 class="category-heading">Hill Stations & Cultural Tours</h2>
+            <p class="category-description">Immerse yourself in the cultural heritage and serene beauty of India's most iconic hill stations</p>
+            
+            <div class="package-container">
+                <div class="package-card">
+                    <div class="package-image">
+                        <img src="../ImagesFinal/p2.jpg" alt="Aravalli Hills Tour">
+                    </div>
+                    <div class="package-content">
+                        <h3>Aravalli Hills Tour</h3>
+                        <p>The Aravalli Range, stretching across several Indian states, offers a variety of experiences that highlight its natural beauty, cultural heritage, and historical significance. Explore ancient forts, wildlife sanctuaries, and picturesque lakes.</p>
+                        
+                        <div class="package-details">
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="detail-text">4 Days</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-user-friends"></i>
+                                </div>
+                                <div class="detail-text">Max 12</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="detail-text">Rajasthan</div>
+                            </div>
+                        </div>
+                        
+                        <div class="package-price">$200 - $400</div>
+                        <a href="payment.html?name=Aravalli%20Hills%20Tour&amount=400" class="btn">Book Now</a>
+                    </div>
+                </div>
+
+                <div class="package-card">
+                    <div class="package-image">
+                        <img src="../ImagesFinal/p4.jpg" alt="Gangtok Tour">
+                    </div>
+                    <div class="package-content">
+                        <h3>Gangtok Tour</h3>
+                        <p>Explore Gangtok, the capital city of Sikkim, known for its scenic beauty, vibrant culture, and proximity to the Himalayas. Visit monasteries, enjoy panoramic mountain views, and experience the unique blend of Sikkimese and Tibetan cultures.</p>
+                        
+                        <div class="package-details">
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="detail-text">6 Days</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-user-friends"></i>
+                                </div>
+                                <div class="detail-text">Max 10</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="detail-text">Sikkim</div>
+                            </div>
+                        </div>
+                        
+                        <div class="package-price">$350 - $650</div>
+                        <a href="payment.html?name=Gangtok%20Tour&amount=650" class="btn">Book Now</a>
+                    </div>
+                </div>
+
+                <div class="package-card">
+                    <div class="package-image">
+                        <img src="../ImagesFinal/p6.jpg" alt="Rishikesh Tour">
+                    </div>
+                    <div class="package-content">
+                        <h3>Rishikesh Tour Package</h3>
+                        <p>Rishikesh, nestled in the foothills of the Himalayas along the Ganges River, is renowned for its spiritual ambiance, yoga retreats, and adventure activities. Experience white water rafting, visit ancient temples, and enjoy the serene beauty of this holy city.</p>
+                        
+                        <div class="package-details">
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="detail-text">5 Days</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-user-friends"></i>
+                                </div>
+                                <div class="detail-text">Max 15</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="detail-text">Uttarakhand</div>
+                            </div>
+                        </div>
+                        
+                        <div class="package-price">$250 - $500</div>
+                        <a href="payment.html?name=Rishikesh%20Tour%20Package&amount=500" class="btn">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="package-category">
+            <h2 class="category-heading">Madhya Pradesh Specials</h2>
+            <p class="category-description">Explore the heart of India with our exclusive tours starting from Indore</p>
+            
+            <div class="package-container">
+                <div class="package-card">
+                    <div class="package-image">
+                        <img src="../ImagesFinal/ujjain.jpg" alt="Ujjain Spiritual Tour">
+                    </div>
+                    <div class="package-content">
+                        <h3>Ujjain Spiritual Tour</h3>
+                        <p>Experience the spiritual heritage of Ujjain, one of India's seven sacred cities. Visit the famous Mahakaleshwar Temple, participate in the mesmerizing Shipra Aarti, and explore the ancient astronomical observatory of Vedh Shala.</p>
+                        
+                        <div class="package-details">
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="detail-text">2 Days</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-user-friends"></i>
+                                </div>
+                                <div class="detail-text">Max 20</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="detail-text">MP</div>
+                            </div>
+                        </div>
+                        
+                        <div class="package-price">$100 - $200</div>
+                        <a href="payment.html?name=Ujjain%20Spiritual%20Tour&amount=200" class="btn">Book Now</a>
+                    </div>
+                </div>
+
+                <div class="package-card">
+                    <div class="package-image">
+                        <img src="../ImagesFinal/khajuraho.jpg" alt="Khajuraho-Orchha Tour">
+                    </div>
+                    <div class="package-content">
+                        <h3>Khajuraho-Orchha Tour</h3>
+                        <p>Discover the architectural marvels of Madhya Pradesh with this special tour covering the UNESCO World Heritage site of Khajuraho temples and the medieval city of Orchha with its stunning palaces and cenotaphs.</p>
+                        
+                        <div class="package-details">
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="detail-text">4 Days</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-user-friends"></i>
+                                </div>
+                                <div class="detail-text">Max 12</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="detail-text">MP</div>
+                            </div>
+                        </div>
+                        
+                        <div class="package-price">$200 - $400</div>
+                        <a href="payment.html?name=Khajuraho-Orchha%20Tour&amount=400" class="btn">Book Now</a>
+                    </div>
+                </div>
+
+                <div class="package-card">
+                    <div class="package-image">
+                        <img src="../ImagesFinal/pachmari.jpg" alt="Pachmarhi Hill Station">
+                    </div>
+                    <div class="package-content">
+                        <h3>Pachmarhi Hill Station</h3>
+                        <p>Explore the only hill station in Madhya Pradesh, known as "Queen of the Satpura Range." Discover caves with ancient rock paintings, stunning waterfalls, lush forests, and colonial-era architecture in this serene natural paradise.</p>
+                        
+                        <div class="package-details">
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="detail-text">3 Days</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-user-friends"></i>
+                                </div>
+                                <div class="detail-text">Max 15</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="detail-text">MP</div>
+                            </div>
+                        </div>
+                        
+                        <div class="package-price">$150 - $300</div>
+                        <a href="payment.html?name=Pachmarhi%20Hill%20Station&amount=300" class="btn">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services section starts  -->
+    <section class="services">
+        <h1 class="heading">What We Offer</h1>
+        <div class="box-container">
+            <div class="box">
+                <img src="family.png" alt="">
+                <h3>Family Trips</h3>
+                <p>Planning an adventurous ride for a family trip can be a fantastic way to create unforgettable memories. Here are some offers and ideas tailored to families, ensuring fun, safety</p>
+                <a href="payment.html?name=Family%20Trips%20Package&amount=350" class="btn">Read More</a>
+            </div>
+            <div class="box">
+                <img src="sev1.png" alt="">
+                <h3>Complete Guide</h3>
+                <p>Planning an adventurous trip involves several key steps to ensure a safe, enjoyable, and memorable experience</p>
+                <a href="payment.html?name=Complete%20Guide%20Package&amount=250" class="btn">Read More</a>
+            </div>
+            <div class="box">
+                <img src="sev3.png" alt="">
+                <h3>Custom Packages</h3>
+                <p>For adventurous ride packages, you can offer custom experiences such as mountain biking tours, off-roading expeditions, motorcycle road trips, horseback riding adventures, kayaking or rafting trips, skydiving</p>
+                <a href="payment.html?name=Custom%20Adventure%20Package&amount=400" class="btn">Read More</a>
+            </div>
+            <div class="box">
+                <img src="sev4.png" alt="">
+                <h3>Train Guides</h3>
+                <p>Explore exciting offers from our exclusive train guides, designed to take you on scenic routes through breathtaking landscapes. Whether you're seeking a thrilling mountain journey or a relaxing countryside tour, our packages include expert guides who will enrich your adventure with fascinating stories and insights. </p>
+                <a href="payment.html?name=Train%20Guides%20Package&amount=300" class="btn">Read More</a>
+            </div>
+            <div class="box">
+                <img src="sev6.png" alt="">
+                <h3> Adventure Trail</h3>
+                <p>we have the perfect trail for you. Experience breathtaking views, heart-pounding obstacles, and the joy of exploring new terrains with our guided tours, all tailored to your skill level. Book now for a limited-time discount and make your next adventure unforgettable.</p>
+                <a href="payment.html?name=Adventure%20Trail%20Package&amount=450" class="btn">Read More</a>
+            </div>
+            <div class="box">
+                <img src="sev5.png" alt="">
+                <h3>Various Adventure</h3>
+                <p>Each adventure comes with special discounts and exclusive deals, ensuring your experience is unforgettable without breaking the bank. Whether you're seeking the rush of water sports, hiking through rugged terrains, or a serene hot air balloon ride</p>
+                <a href="payment.html?name=Various%20Adventure%20Package&amount=350" class="btn">Read More</a>
+            </div>
+        </div>
+    </section>
+    <!-- Services section ends  -->
+
+    <section class="footer">
+        <div class="box-container">
+            <div class="box">
+                <h3>Quick Links</h3>
+                <a href="home.html#home">home</a>
+                <a href="home.html#about">about</a>
+                <a href="shop.html">shop</a>
+                <a href="packages.html">packages</a>
+                <a href="home.html#reviews">reviews</a>
+                <a href="home.html#blogs">blogs</a>
+                <a href="chat.html">AI Assistant</a>
+                <a href="./reviews.html">add reviews</a>
+            </div>
+            <div class="box">
+                <h3>Extra Links</h3>
+                <a href="#">My Account</a>
+                <a href="#">My Order</a>
+                <a href="#">Whishlist</a>
+                <a href="#">Any Question </a>
+                <a href="#">Terms of Use</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="box">
+                <h3>Contact Information</h3>
+                <a href="#"><i class="fas fa-phone"></i>+91-7241142006</a>
+                <a href="#"><i class="fas fa-phone"></i>+91-9705745856</a>
+                <a href="#"><i class="fas fa-envelope"></i>travel_utsav@gmail.com</a>
+                <a href="#"><i class="fas fa-map"></i>indore, Madhya Pradesh - 451010</a>
+            </div>
+            <div class="box">
+                <a href="#"><i class="fab fa-facebook-f"></i>facebook</a>
+                <a href="#"><i class="fab fa-twitter"></i>Twitter</a>
+                <a href="#"><i class="fab fa-instagram"></i>Instagram</a>
+                <a href="#"><i class="fab fa-github"></i>Github</a>
+            </div>
+        </div>
+        <div class="credit">Created By <span>Travel Utsav Team</span> | All Rights Reserved</div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="home.js"></script>
+    <script src="emergency.js"></script>
+</body>
+</html> 

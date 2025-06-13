@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Package Details - Travel Utsav</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="emergency.css">
+    <style>
+        .package-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+        
+        .package-header {
+            position: relative;
+            height: 400px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+        
+        .package-header img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        .header-overlay h1 {
+            color: #fff;
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .package-price {
+            color: #fff;
+            font-size: 2.2rem;
+            background-color: #219150;
+            padding: 10px 25px;
+            border-radius: 50px;
+            margin-top: 15px;
+            display: inline-block;
+        }
+        
+        .package-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+        }
+        
+        .package-details h2 {
+            font-size: 2.6rem;
+            color: #219150;
+            margin-bottom: 20px;
+        }
+        
+        .package-description {
+            font-size: 1.6rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 25px;
+        }
+        
+        .feature-list {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .feature-list li {
+            font-size: 1.6rem;
+            line-height: 1.8;
+            color: #555;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature-list li i {
+            color: #219150;
+            margin-right: 15px;
+            font-size: 1.8rem;
+        }
+        
+        .package-sidebar {
+            background-color: #f9f9f9;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 20px;
+        }
+        
+        .sidebar-title {
+            font-size: 2.2rem;
+            color: #219150;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #219150;
+            padding-bottom: 10px;
+        }
+        
+        .package-info {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+        
+        .package-info li {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 1.6rem;
+            color: #555;
+        }
+        
+        .booking-btn {
+            display: block;
+            padding: 15px;
+            background-color: #219150;
+            color: #fff;
+            text-align: center;
+            border-radius: 5px;
+            font-size: 1.8rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .booking-btn:hover {
+            background-color: #157347;
+        }
+        
+        .package-gallery {
+            margin-top: 60px;
+        }
+        
+        .gallery-title {
+            font-size: 2.6rem;
+            color: #219150;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            height: 200px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .related-packages {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid #eee;
+        }
+        
+        .related-title {
+            font-size: 2.6rem;
+            color: #219150;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .related-card {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .related-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .related-img {
+            height: 200px;
+        }
+        
+        .related-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .related-content {
+            padding: 20px;
+        }
+        
+        .related-title-small {
+            font-size: 2rem;
+            color: #219150;
+            margin-bottom: 10px;
+        }
+        
+        .related-price {
+            color: #555;
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+        }
+        
+        .related-btn {
+            display: inline-block;
+            padding: 8px 20px;
+            background-color: #219150;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 1.4rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        
+        .related-btn:hover {
+            background-color: #157347;
+        }
+        
+        @media (max-width: 992px) {
+            .package-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .package-sidebar {
+                position: static;
+                margin-bottom: 30px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .package-header {
+                height: 300px;
+            }
+            
+            .header-overlay h1 {
+                font-size: 3rem;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- header section -->
+    <header class="header">
+        <a href="home.html" class="logo"><i class="fas fa-paper-plane"></i> Travel Utsav</a>
+        <nav class="navbar">
+            <a href="home.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="packages.html">Packages</a>
+            <a href="adventure-ideas.html">Adventures</a>
+            <a href="shop.html">Shop</a>
+            <a href="blogs.html">Blogs</a>
+            <a href="reviews.html">Reviews</a>
+            <a href="chat.html">AI Assistant</a>
+        </nav>
+        <div class="icons">
+            <div id="menu-btn" class="fas fa-bars"></div>
+            <a href="shop.html" class="fas fa-shopping-cart"></a>
+            <div id="search-btn" class="fas fa-search"></div>
+        </div>
+        <form action="" class="search-form">
+            <input type="search" name="" placeholder="search here..." id="search-box">
+            <label for="search-box" class="fas fa-search"></label>
+        </form>
+    </header>
+
+    <!-- Package Details Section -->
+    <div class="package-container">
+        <div class="package-header">
+            <img src="../ImagesFinal/p1.jpg" id="package-main-image" alt="Package Image">
+            <div class="header-overlay">
+                <h1 id="package-title">Adventure Package</h1>
+                <div class="package-price" id="package-price">₹0</div>
+            </div>
+        </div>
+        
+        <div class="package-content">
+            <div class="package-details">
+                <h2>Package Details</h2>
+                <p class="package-description" id="package-description">
+                    Loading package details...
+                </p>
+                
+                <h2>Highlights</h2>
+                <ul class="feature-list" id="feature-list">
+                    <li><i class="fas fa-check-circle"></i> Professional guides with extensive experience</li>
+                    <li><i class="fas fa-check-circle"></i> Quality equipment provided for all activities</li>
+                    <li><i class="fas fa-check-circle"></i> Safety briefing and training before each activity</li>
+                    <li><i class="fas fa-check-circle"></i> Stunning photo opportunities along the route</li>
+                    <li><i class="fas fa-check-circle"></i> Refreshments and meals included</li>
+                </ul>
+                
+                <h2>Detailed Itinerary</h2>
+                <div id="itinerary-content">
+                    <p class="package-description">
+                        Our adventures are carefully planned to provide the perfect balance of excitement, safety, and natural beauty. The exact itinerary varies based on the package, weather conditions, and group preferences, but you can expect:
+                    </p>
+                    
+                    <p class="package-description">
+                        <strong>Day 1:</strong> Orientation and introduction to the activity, safety briefing, equipment familiarization, and starter sessions.
+                    </p>
+                    
+                    <p class="package-description">
+                        <strong>Day 2:</strong> Main activity day with professional guidance, including scenic routes and photo opportunities at key locations.
+                    </p>
+                    
+                    <p class="package-description">
+                        <strong>Day 3:</strong> Advanced sessions for those interested, plus cultural experiences related to the region.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="package-sidebar">
+                <h3 class="sidebar-title">Quick Info</h3>
+                <ul class="package-info">
+                    <li><span>Duration:</span> <span id="package-duration">2-3 Days</span></li>
+                    <li><span>Group Size:</span> <span id="package-group-size">5-15 People</span></li>
+                    <li><span>Difficulty:</span> <span id="package-difficulty">Moderate</span></li>
+                    <li><span>Age Limit:</span> <span id="package-age">12+ Years</span></li>
+                    <li><span>Season:</span> <span id="package-season">All Year</span></li>
+                    <li><span>Starting Point:</span> <span id="package-start">Indore, MP</span></li>
+                </ul>
+                
+                <h3 class="sidebar-title">What to Bring</h3>
+                <ul class="package-info" id="package-requirements">
+                    <li>Comfortable clothing</li>
+                    <li>Hiking shoes/boots</li>
+                    <li>Sunscreen and hat</li>
+                    <li>Water bottle</li>
+                    <li>Camera</li>
+                </ul>
+                
+                <a href="#" class="booking-btn" id="booking-link">Book This Package</a>
+            </div>
+        </div>
+        
+        <div class="package-gallery">
+            <h2 class="gallery-title">Gallery</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="../ImagesFinal/p1.jpg" alt="Gallery Image 1">
+                </div>
+                <div class="gallery-item">
+                    <img src="../ImagesFinal/p2.jpg" alt="Gallery Image 2">
+                </div>
+                <div class="gallery-item">
+                    <img src="../ImagesFinal/p3.jpg" alt="Gallery Image 3">
+                </div>
+                <div class="gallery-item">
+                    <img src="../ImagesFinal/p4.jpg" alt="Gallery Image 4">
+                </div>
+            </div>
+        </div>
+        
+        <div class="related-packages">
+            <h2 class="related-title">You May Also Like</h2>
+            <div class="related-grid">
+                <div class="related-card">
+                    <div class="related-img">
+                        <img src="../ImagesFinal/p5.jpg" alt="Related Package 1">
+                    </div>
+                    <div class="related-content">
+                        <h3 class="related-title-small">Leh Ladakh Tour</h3>
+                        <p class="related-price">₹950</p>
+                        <a href="payment.html?name=Leh%20Ladakh%20Tour&amount=950" class="related-btn">Book Now</a>
+                    </div>
+                </div>
+                
+                <div class="related-card">
+                    <div class="related-img">
+                        <img src="../ImagesFinal/p3.jpg" alt="Related Package 2">
+                    </div>
+                    <div class="related-content">
+                        <h3 class="related-title-small">Himachal 9 Days Tour</h3>
+                        <p class="related-price">₹800</p>
+                        <a href="payment.html?name=Himachal%209%20Days%20Tour&amount=800" class="related-btn">Book Now</a>
+                    </div>
+                </div>
+                
+                <div class="related-card">
+                    <div class="related-img">
+                        <img src="../ImagesFinal/p6.jpg" alt="Related Package 3">
+                    </div>
+                    <div class="related-content">
+                        <h3 class="related-title-small">Rishikesh Tour Package</h3>
+                        <p class="related-price">₹500</p>
+                        <a href="payment.html?name=Rishikesh%20Tour%20Package&amount=500" class="related-btn">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- footer section -->
+    <section class="footer">
+        <div class="box-container">
+            <div class="box">
+                <h3>Quick Links</h3>
+                <a href="home.html"><i class="fas fa-angle-right"></i>Home</a>
+                <a href="about.html"><i class="fas fa-angle-right"></i>About</a>
+                <a href="packages.html"><i class="fas fa-angle-right"></i>Packages</a>
+                <a href="shop.html"><i class="fas fa-angle-right"></i>Shop</a>
+                <a href="reviews.html"><i class="fas fa-angle-right"></i>Reviews</a>
+                <a href="blogs.html"><i class="fas fa-angle-right"></i>Blogs</a>
+            </div>
+            <div class="box">
+                <h3>Extra Links</h3>
+                <a href="#"><i class="fas fa-angle-right"></i>My Account</a>
+                <a href="#"><i class="fas fa-angle-right"></i>My Order</a>
+                <a href="#"><i class="fas fa-angle-right"></i>My Wishlist</a>
+                <a href="#"><i class="fas fa-angle-right"></i>Ask Questions</a>
+                <a href="#"><i class="fas fa-angle-right"></i>Terms of Use</a>
+                <a href="#"><i class="fas fa-angle-right"></i>Privacy Policy</a>
+            </div>
+            <div class="box">
+                <h3>Contact Info</h3>
+                <a href="#"><i class="fas fa-phone"></i>+91-7241142006</a>
+                <a href="#"><i class="fas fa-phone"></i>+91-9705745856</a>
+                <a href="#"><i class="fas fa-envelope"></i>travelutsav@gmail.com</a>
+                <a href="#"><i class="fas fa-map"></i>Indore, Madhya Pradesh - 452001</a>
+            </div>
+            <div class="box">
+                <h3>Follow Us</h3>
+                <a href="#"><i class="fab fa-facebook-f"></i>Facebook</a>
+                <a href="#"><i class="fab fa-twitter"></i>Twitter</a>
+                <a href="#"><i class="fab fa-instagram"></i>Instagram</a>
+                <a href="#"><i class="fab fa-linkedin"></i>LinkedIn</a>
+                <a href="#"><i class="fab fa-github"></i>Github</a>
+            </div>
+        </div>
+        <div class="credit">Created by <span>Travel Utsav</span> | All Rights Reserved</div>
+    </section>
+
+    <!-- custom js file link -->
+    <script>
+        // Menu button functionality
+        document.querySelector('#menu-btn').onclick = () => {
+            document.querySelector('.navbar').classList.toggle('active');
+        }
+
+        // Search button functionality
+        document.querySelector('#search-btn').onclick = () => {
+            document.querySelector('.search-form').classList.toggle('active');
+        }
+        
+        // Package details functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const packageName = urlParams.get('name');
+            const packageAmount = urlParams.get('amount');
+            
+            // Set booking link
+            document.getElementById('booking-link').href = `payment.html?name=${encodeURIComponent(packageName || 'Adventure Package')}&amount=${packageAmount || '350'}`;
+            
+            // Update package title and price
+            if (packageName) {
+                document.getElementById('package-title').textContent = packageName;
+                document.title = packageName + ' - Travel Utsav';
+            }
+            
+            if (packageAmount) {
+                document.getElementById('package-price').textContent = '₹' + packageAmount;
+            }
+            
+            // Package data based on name
+            const packageData = {
+                'Canoeing Adventure': {
+                    image: '../ImagesFinal/Canoeing.jpg',
+                    description: 'Experience the thrill of canoeing through beautiful waters with our expert-led Canoeing Adventure. Suitable for beginners and experienced paddlers alike, this adventure offers a perfect balance of excitement and tranquility as you navigate through scenic waterways around Indore, Madhya Pradesh.',
+                    duration: '1-2 Days',
+                    difficulty: 'Easy to Moderate',
+                    age: '8+ Years',
+                    groupSize: '4-12 People',
+                    season: 'Monsoon & Post-Monsoon',
+                    start: 'Indore, MP'
+                },
+                'Bungee Jump Adventure': {
+                    image: '../ImagesFinal/jump.jpg',
+                    description: 'Take the leap of faith with our Bungee Jump Adventure! Feel the ultimate adrenaline rush as you jump from a high platform with nothing but an elastic cord attached to your ankles. Our professional staff ensures complete safety while you experience this thrilling activity at one of the most scenic locations in India.',
+                    duration: '1 Day',
+                    difficulty: 'Adventurous',
+                    age: '18+ Years',
+                    groupSize: 'Individual or Group',
+                    season: 'All Year (Weather Permitting)',
+                    start: 'Rishikesh, Uttarakhand'
+                },
+                'Zip Line Adventure': {
+                    image: '../ImagesFinal/zip.jpg',
+                    description: 'Soar through the air on our exhilarating Zip Line Adventure! Glide across valleys, forests, and breathtaking landscapes while safely harnessed to our premium zip line equipment. Experience the sensation of flying while taking in panoramic views of nature\'s beauty below.',
+                    duration: '1 Day',
+                    difficulty: 'Easy',
+                    age: '10+ Years',
+                    groupSize: '5-20 People',
+                    season: 'All Year',
+                    start: 'Multiple Locations from Indore'
+                },
+                'Kayaking Adventure': {
+                    image: '../ImagesFinal/kayaking.jpg',
+                    description: 'Paddle through serene lakes or tackle thrilling rapids with our Kayaking Adventure package. Perfect for nature lovers and adventure seekers alike, kayaking offers a unique perspective of the water world while providing a great workout. Our experienced guides will teach you proper kayaking techniques and lead you through the most scenic routes.',
+                    duration: '1-3 Days',
+                    difficulty: 'Beginner to Advanced Options',
+                    age: '12+ Years',
+                    groupSize: '2-10 People',
+                    season: 'Year Round (Best during Monsoon)',
+                    start: 'Indore, MP'
+                },
+                'Memorable Outdoor Adventure Package': {
+                    image: '../ImagesFinal/memory.jpg',
+                    description: 'Our signature Memorable Outdoor Adventure Package combines multiple activities for a comprehensive outdoor experience. From hiking and camping to wildlife spotting and cultural encounters, this package is designed to create lasting memories through carefully curated experiences that showcase the natural beauty and cultural richness of Madhya Pradesh and beyond.',
+                    duration: '3-5 Days',
+                    difficulty: 'Moderate',
+                    age: '14+ Years',
+                    groupSize: '5-15 People',
+                    season: 'October to March',
+                    start: 'Indore, MP'
+                }
+            };
+            
+            // Update package details if data exists
+            if (packageName && packageData[packageName]) {
+                const data = packageData[packageName];
+                
+                // Update image
+                document.getElementById('package-main-image').src = data.image;
+                
+                // Update description
+                document.getElementById('package-description').textContent = data.description;
+                
+                // Update quick info
+                document.getElementById('package-duration').textContent = data.duration;
+                document.getElementById('package-difficulty').textContent = data.difficulty;
+                document.getElementById('package-age').textContent = data.age;
+                document.getElementById('package-group-size').textContent = data.groupSize;
+                document.getElementById('package-season').textContent = data.season;
+                document.getElementById('package-start').textContent = data.start;
+            }
+        });
+    </script>
+    <script src="emergency.js"></script>
+</body>
+</html> 

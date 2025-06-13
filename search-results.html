@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - Travel Utsav</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="home.css">
+    <style>
+        .search-results-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .search-info {
+            margin-bottom: 3rem;
+            padding: 1.5rem;
+            background: #f9f9f9;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .search-info h2 {
+            font-size: 2.2rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .search-info p {
+            font-size: 1.6rem;
+            color: #666;
+        }
+        
+        .search-query {
+            color: #219150;
+            font-weight: bold;
+        }
+        
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .result-card {
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .result-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .result-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .result-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .result-card:hover .result-image img {
+            transform: scale(1.1);
+        }
+        
+        .result-content {
+            padding: 2rem;
+        }
+        
+        .result-title {
+            font-size: 2rem;
+            color: #219150;
+            margin-bottom: 1rem;
+        }
+        
+        .result-category {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: #e6f7ef;
+            color: #219150;
+            border-radius: 30px;
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .result-excerpt {
+            font-size: 1.5rem;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+        
+        .no-results h3 {
+            font-size: 2.4rem;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+        
+        .no-results p {
+            font-size: 1.6rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        
+        .search-suggestions {
+            margin-top: 3rem;
+        }
+        
+        .search-suggestions h3 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .suggestion-chips {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .suggestion-chip {
+            padding: 0.8rem 1.5rem;
+            background: #f0f0f0;
+            border-radius: 30px;
+            font-size: 1.5rem;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .suggestion-chip:hover {
+            background: #219150;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <a href="home.html" class="logo"><i class="fas fa-hiking"></i>travel Utsav</a>
+        
+        <nav class="navbar">
+            <div id="nav-close" class="fas fa-times"></div>
+            <a href="home.html">home</a>
+            <a href="home.html#about">about</a>
+            <a href="packages.html">packages</a>
+            <a href="reviews.html">reviews</a>
+            <a href="blogs.html">blogs</a>
+            <a href="chat.html">AI Assistant</a>
+        </nav>
+        <div class="icons">
+            <div id="menu-btn" class="fas fa-bars"></div>
+            <div id="search-btn" class="fas fa-search"></div>
+            <a href="shop.html" class="fas fa-shopping-cart"></a>
+            <a href="./travelPage.html" class="fa-solid fa-motorcycle"></a>
+            <a href="../group_chat.php" class="fa-solid fa-comments"></a>
+            <a href="../auth.php" class="fa-regular fa-user"></a>
+        </div>
+    </header>
+
+    <div class="search-form">
+        <div id="close-search" class="fas fa-times"></div>
+        <form action="search-results.html" method="GET">
+            <input type="search" name="query" placeholder="search here..." id="search-box">
+            <label for="search-box" class="fas fa-search"></label>
+        </form>
+    </div>
+
+    <section style="margin-top: 8rem;">
+        <h1 class="heading">Search Results</h1>
+        
+        <div class="search-results-container">
+            <div class="search-info">
+                <h2>Results for: <span class="search-query" id="search-term"></span></h2>
+                <p>Found <span id="result-count">0</span> results</p>
+            </div>
+            
+            <div class="results-grid" id="results-container">
+                <!-- Results will be populated here by JavaScript -->
+            </div>
+            
+            <div id="no-results" class="no-results" style="display: none;">
+                <h3>No results found</h3>
+                <p>We couldn't find any matches for your search query. Please try different keywords or browse our popular categories below.</p>
+                <a href="home.html" class="btn">Back to Home</a>
+            </div>
+            
+            <div class="search-suggestions">
+                <h3>Popular Searches</h3>
+                <div class="suggestion-chips">
+                    <a href="search-results.html?query=ladakh" class="suggestion-chip">Ladakh</a>
+                    <a href="search-results.html?query=adventure" class="suggestion-chip">Adventure</a>
+                    <a href="search-results.html?query=packages" class="suggestion-chip">Packages</a>
+                    <a href="search-results.html?query=indore" class="suggestion-chip">Indore</a>
+                    <a href="search-results.html?query=trekking" class="suggestion-chip">Trekking</a>
+                    <a href="search-results.html?query=rajasthan" class="suggestion-chip">Rajasthan</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="footer">
+        <div class="box-container">
+            <div class="box">
+                <h3>Quick Links</h3>
+                <a href="home.html">home</a>
+                <a href="home.html#about">about</a>
+                <a href="shop.html">shop</a>
+                <a href="packages.html">packages</a>
+                <a href="reviews.html">reviews</a>
+                <a href="blogs.html">blogs</a>
+                <a href="chat.html">AI Assistant</a>
+            </div>
+            <div class="box">
+                <h3>Extra Links</h3>
+                <a href="#">My Account</a>
+                <a href="#">My Order</a>
+                <a href="#">Wishlist</a>
+                <a href="#">Any Question </a>
+                <a href="#">Terms of Use</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="box">
+                <h3>Contact Information</h3>
+                <a href="#"><i class="fas fa-phone"></i>+91-7241142006</a>
+                <a href="#"><i class="fas fa-phone"></i>+91-9705745856</a>
+                <a href="#"><i class="fas fa-envelope"></i>travel_utsav@gmail.com</a>
+                <a href="#"><i class="fas fa-map"></i>indore, Madhya Pradesh - 451010</a>
+            </div>
+            <div class="box">
+                <a href="#"><i class="fab fa-facebook-f"></i>facebook</a>
+                <a href="#"><i class="fab fa-twitter"></i>Twitter</a>
+                <a href="#"><i class="fab fa-instagram"></i>Instagram</a>
+                <a href="#"><i class="fab fa-github"></i>Github</a>
+            </div>
+        </div>
+        <div class="credit">Created By <span>Travel Utsav Team</span> | All Rights Reserved</div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="home.js"></script>
+    
+    <script>
+        // Sample data for search results
+        const siteData = [
+            {
+                title: "Leh Ladakh Tour",
+                category: "Package",
+                excerpt: "Explore the stunning landscapes of Leh Ladakh with our premium tour package. Experience the beauty of Pangong Lake, Nubra Valley, and ancient monasteries.",
+                image: "../ImagesFinal/p5.jpg",
+                url: "packages.html",
+                keywords: ["ladakh", "tour", "package", "mountain", "adventure", "himalaya", "travel"]
+            },
+            {
+                title: "Mountain Trekking Blog",
+                category: "Blog",
+                excerpt: "Mountain trekking offers an unparalleled adventure, blending breathtaking landscapes with physical challenge. Discover the best trekking routes and tips.",
+                image: "bolg2.jpg",
+                url: "blogs.html",
+                keywords: ["mountain", "trekking", "hiking", "adventure", "blog", "travel"]
+            },
+            {
+                title: "Goa Boating Experience",
+                category: "Blog",
+                excerpt: "Goa is a paradise for boating enthusiasts, offering a wide range of thrilling experiences on its pristine waters. From serene river cruises to adventurous sea trips.",
+                image: "blog3.jpg",
+                url: "blogs.html",
+                keywords: ["goa", "boating", "beach", "water", "adventure", "travel"]
+            },
+            {
+                title: "Rajasthan Desert Safari",
+                category: "Package",
+                excerpt: "Experience the magic of Rajasthan's desert landscape with our special desert safari package. Enjoy camel rides, cultural performances, and stargazing.",
+                image: "blog5.jpg",
+                url: "packages.html",
+                keywords: ["rajasthan", "desert", "safari", "camel", "adventure", "travel"]
+            },
+            {
+                title: "Indore Street Food Tour",
+                category: "Blog",
+                excerpt: "Discover the rich culinary heritage of Indore with our guided street food tour. From the famous Sarafa Bazaar to the iconic poha-jalebi breakfast.",
+                image: "../ImagesFinal/food1.jpg",
+                url: "blogs.html",
+                keywords: ["indore", "food", "street food", "culinary", "madhya pradesh", "travel"]
+            },
+            {
+                title: "Adventure Backpack",
+                category: "Product",
+                excerpt: "Durable, water-resistant backpack with multiple compartments perfect for adventure travel. Ideal for hiking, trekking, and outdoor activities.",
+                image: "../ImagesFinal/bags.jpg",
+                url: "shop.html",
+                keywords: ["backpack", "bag", "adventure", "gear", "hiking", "trekking", "product"]
+            },
+            {
+                title: "Ujjain Spiritual Tour",
+                category: "Package",
+                excerpt: "Experience the spiritual heritage of Ujjain, one of India's seven sacred cities. Visit the famous Mahakaleshwar Temple and other sacred sites.",
+                image: "../ImagesFinal/ujjain.jpg",
+                url: "packages.html",
+                keywords: ["ujjain", "spiritual", "temple", "madhya pradesh", "tour", "travel"]
+            },
+            {
+                title: "Pachmarhi Hill Station",
+                category: "Package",
+                excerpt: "Explore the only hill station in Madhya Pradesh, known as 'Queen of the Satpura Range' with its breathtaking views and natural beauty.",
+                image: "../ImagesFinal/pachmari.jpg",
+                url: "packages.html",
+                keywords: ["pachmarhi", "hill station", "madhya pradesh", "nature", "travel"]
+            }
+        ];
+        
+        // Get search query from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const searchQuery = urlParams.get('query') || '';
+        
+        // Display search query
+        document.getElementById('search-term').textContent = searchQuery;
+        
+        // Filter results based on search query
+        function filterResults(query) {
+            if (!query) return [];
+            
+            const normalizedQuery = query.toLowerCase();
+            
+            return siteData.filter(item => {
+                // Check title
+                if (item.title.toLowerCase().includes(normalizedQuery)) return true;
+                
+                // Check excerpt
+                if (item.excerpt.toLowerCase().includes(normalizedQuery)) return true;
+                
+                // Check keywords
+                return item.keywords.some(keyword => keyword.includes(normalizedQuery));
+            });
+        }
+        
+        // Render search results
+        function renderResults(results) {
+            const resultsContainer = document.getElementById('results-container');
+            const noResultsElement = document.getElementById('no-results');
+            const resultCountElement = document.getElementById('result-count');
+            
+            // Update result count
+            resultCountElement.textContent = results.length;
+            
+            // Clear previous results
+            resultsContainer.innerHTML = '';
+            
+            if (results.length === 0) {
+                // Show no results message
+                noResultsElement.style.display = 'block';
+                return;
+            }
+            
+            // Hide no results message
+            noResultsElement.style.display = 'none';
+            
+            // Add results to container
+            results.forEach(result => {
+                const resultCard = document.createElement('div');
+                resultCard.className = 'result-card';
+                
+                resultCard.innerHTML = `
+                    <div class="result-image">
+                        <img src="${result.image}" alt="${result.title}">
+                    </div>
+                    <div class="result-content">
+                        <span class="result-category">${result.category}</span>
+                        <h3 class="result-title">${result.title}</h3>
+                        <div class="result-excerpt">${result.excerpt}</div>
+                        <a href="${result.url}" class="btn">View Details</a>
+                    </div>
+                `;
+                
+                resultsContainer.appendChild(resultCard);
+            });
+        }
+        
+        // Initialize search
+        document.addEventListener('DOMContentLoaded', () => {
+            const results = filterResults(searchQuery);
+            renderResults(results);
+        });
+    </script>
+</body>
+</html> 
